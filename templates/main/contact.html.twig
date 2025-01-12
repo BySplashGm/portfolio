@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <div class="contact-container">
+            <div class="contact-form">
+                <h1>Contactez-moi</h1>
+                <p>Si vous avez des questions ou des demandes, n'hésitez pas à me contacter via le formulaire ci-dessous.</p>
+
+                <!-- Formulaire de contact -->
+                <form action="{{ path('contact_submit') }}" method="post" class="contact-form-content">
+                    <div class="form-group">
+                        <label for="name">Nom :</label>
+                        <input type="text" id="name" name="name" required placeholder="Votre nom" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email :</label>
+                        <input type="email" id="email" name="email" required placeholder="Votre adresse email" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message :</label>
+                        <textarea id="message" name="message" required placeholder="Votre message" rows="5" class="form-textarea"></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <section class="admin-dashboard">
+            <h1 class="dashboard-title">Tableau de bord - Administration</h1>
+
+            <div class="actions-container">
+                <a href="{{ path('index') }}" class="button button-add">Ajouter un projet</a>
+            </div>
+
+            <div class="projects-table-container">
+                {% if projects is not empty %}
+                    <table class="projects-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Date de création</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for project in projects %}
+                            <tr>
+                                <td>{{ project.id }}</td>
+                                <td>{{ project.title }}</td>
+                                <td>{{ project.description|length > 50 ? project.description[:50] ~ '...' : project.description }}</td>
+                                <td>{{ project.createdAt|date('d/m/Y') }}</td>
+                                <td>
+                                    <a href="{{ path('index', {'id': project.id}) }}" class="button button-edit">Modifier</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Aucun projet trouvé. Vous pouvez en ajouter un à l'aide du bouton ci-dessus.</p>
+                {% endif %}
+            </div>
+
+            <div class="actions-container">
+                <a href="{{ path('index') }}" class="button button-add">Ajouter une compétence</a>
+            </div>
+            <div class="projects-table-container">
+                {% if projects is not empty %}
+                    <table class="projects-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Titre</th>
+                            <th>Nom</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for skill in skills %}
+                            <tr>
+                                <td>{{ skill.id }}</td>
+                                <td>{{ skill.label }}</td>
+                                <td>{{ skill.name }}</td>
+                                <td>{{ skill.type.label }}</td>
+                                <td>{{ skill.description|length > 50 ? skill.description[:50] ~ '...' : skill.description }}</td>
+                                <td>
+                                    <a href="{{ path('index', {'id': skill.id}) }}" class="button button-edit">Modifier</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Aucun projet trouvé. Vous pouvez en ajouter un à l'aide du bouton ci-dessus.</p>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+{% endblock %}

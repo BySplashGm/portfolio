@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <main>
+        <section class="projects-section">
+            <h1 class="section-title">Mes Projets</h1>
+            <div class="projects-container">
+                {% for project in projects %}
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="{{ asset(project.imagePath) }}" alt="{{ project.title }}">
+                        </div>
+                        <div class="project-details">
+                            <h2>{{ project.title }}</h2>
+                            <p>{{ project.description }}</p>
+                            <a href="{{ path('project', {'id': project.id}) }}" class="project-link">Voir le projet</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <p>Aucun projet à afficher pour le moment.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <section class="project-details-section">
+            <h1 class="project-title">{{ project.title }}</h1>
+            <div class="project-content">
+                <div class="project-image">
+                    <img src="{{ asset(project.imagePath) }}" alt="{{ project.title }}">
+                </div>
+                <div class="project-description">
+                    <p>{{ project.description }}</p>
+                </div>
+            </div>
+            <div class="project-additional-info">
+                {% if project.skills is not empty %}
+                    <h2>Compétences</h2>
+                    <ul class="skills-list">
+                        {% for skill in project.skills %}
+                            <li><a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.label }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if project.createdAt %}
+                    <p class="project-date">Créé le : {{ project.createdAt|date('d/m/Y') }}</p>
+                {% endif %}
+            </div>
+            <a href="{{ path('projects') }}" class="back-to-projects">Retour aux projets</a>
+        </section>
+    </main>
+{% endblock %}

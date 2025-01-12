@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <img src="{{ asset('images/logo.png') }}" alt="logo" class="hero-logo"/>
+                <h1 class="hero-title">Maxime</h1>
+                <p class="hero-description">Développeur passionné, je crée des solutions innovantes en utilisant les technologies les plus récentes. Explorez mes projets et découvrez mon expertise.</p>
+                <div class="cta-buttons">
+                    <a href="{{ path('about') }}" class="button cta-button">À propos de moi</a>
+                    <a href="{{ path('projects') }}" class="button cta-button">Voir mes projets</a>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

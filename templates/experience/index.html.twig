@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <section class="experience-detail-section">
+            <h1 class="section-title">{{ experience.label }}</h1>
+            <p>{{ experience.description }}</p>
+            <p>Entreprise: {{ experience.company }}</p>
+        </section>
+    </main>
+{% endblock %}
