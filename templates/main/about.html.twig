@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <section class="about-section">
+            <h1 class="section-title">À propos de moi</h1>
+            <div class="about-container">
+                <div class="about-image">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo Maxime">
+                </div>
+                <div class="about-details">
+                    <p>
+                        Je m'appelle Maxime, et je suis un passionné de développement informatique. Mon parcours m'a permis d'acquérir de solides compétences en programmation, notamment en Java, Python, JavaScript et d'autres technologies.
+                    </p>
+                    <p>
+                        J'ai à cœur de créer des projets qui allient efficacité et expérience utilisateur. Actuellement, je suis en deuxième année de BTS SIO et j'aspire à devenir formateur en entreprise.
+                    </p>
+                    <p>
+                        En dehors de mes études, j'aime explorer de nouveaux outils, jouer à des jeux vidéo, et apprendre des nouvelles technologies. Ce portfolio est un reflet de mon travail et de mes réalisations.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="formation-section">
+            <h2 class="section-title">Formation</h2>
+            <div class="formation-container">
+                <div class="formation-card">
+                    <h3>Baccalauréat</h3>
+                    <p>
+                        J'ai obtenu mon baccalauréat dans la filière <strong>Scientifique</strong>, avec une spécialisation en <strong>Mathématiques</strong>. Ce diplôme m'a permis de développer une solide base en logique et en raisonnement analytique, des compétences qui me servent quotidiennement dans mon travail de développeur.
+                    </p>
+                </div>
+                <div class="formation-card">
+                    <h3>BTS SIO</h3>
+                    <p>
+                        Actuellement en deuxième année de BTS SIO (Services Informatiques aux Organisations), je me spécialise dans la gestion des systèmes d'information. Cette formation me permet d'approfondir mes connaissances en programmation, en administration réseau et en gestion de projets informatiques.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="experience-section">
+            <h2 class="section-title">Expériences professionnelles</h2>
+            <div class="experience-container">
+                {% for experience in experiences %}
+                    <div class="experience-card">
+                        <h3>{{ experience.label }}</h3>
+                        <p>
+                            {{ experience.description|slice(0, 150) }}... <!-- Limite à 150 caractères -->
+                        </p>
+                        <a href="{{ path('experience_show', {'id': experience.id}) }}" class="experience-link">En savoir plus</a>
+                    </div>
+                {% else %}
+                    <p>Aucune expérience professionnelle à afficher pour le moment.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="skills-section">
+            <h2 class="section-title">Compétences</h2>
+            <div class="skills-container">
+                {% for skillType in skillTypes %}
+                    <div class="skill-type">
+                        <h3 class="skill-type-title">{{ skillType.label }}</h3>
+                        <ul class="skills-list">
+                            {% for skill in skills %}
+                                {% if skill.type.id == skillType.id %}
+                                    <li>
+                                        <a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.label }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock %}

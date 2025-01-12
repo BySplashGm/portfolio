@@ -1,3 +1,1019 @@
-body {
-    background-color: skyblue;
+/* Variables de couleurs */
+:root {
+    --primary-color: #0077cc;
+    --secondary-color: #0099ff;
+    --background-color: #121212;
+    --background-color2: #1c1c1c;
+    --sp-background-color: #262626;
+    --sp-background-color2: #313030;
+    --title-color: #ffffff;
+    --text-color: #e0e0e0;
+    --link-color: #f1c40f;
+    --link-hover-color: #f39c12;
+    --font-family: 'Inter', sans-serif;
 }
+
+/* Styles globaux */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family), serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 2em 10em;
+    display: flex;
+    flex-direction: column;
+}
+
+.experience-link {
+    color: var(--link-color);
+}
+
+.experience-link:hover {
+    color: var(--link-hover-color);
+}
+
+/* Section Hero */
+.hero {
+    color: var(--title-color);
+    padding: 4rem 2rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Contenu Hero */
+.hero-content {
+    max-width: 900px;
+    padding: 2rem;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Logo */
+.hero-logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 1.5rem;
+}
+
+/* Titre */
+.hero-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+/* Description */
+.hero-description {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+/* Boutons CTA */
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.cta-button {
+    padding: 0.75rem 2rem;
+    background-color: #fdbf0e;
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #ff9700;
+    transform: scale(1.05);
+}
+
+/* Section "À propos de moi" */
+.about-section {
+    padding: 2rem;
+    background-color: var(--sp-background-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem;
+}
+
+.about-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+.about-details {
+    flex: 1;
+    padding-left: 2rem;
+}
+
+.about-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--title-color);
+}
+
+/* Section "Formation" */
+.formation-section {
+    margin-bottom: 3rem;
+}
+
+.formation-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.formation-card {
+    flex: 1;
+    padding: 1.5rem;
+    background-color: var(--sp-background-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.formation-card h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.formation-card p {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+/* Section "Expériences professionnelles" */
+.experience-section {
+    margin-bottom: 3rem;
+}
+
+.experience-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.experience-card {
+    flex: 1;
+    padding: 1.5rem;
+    background-color: var(--sp-background-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.experience-card h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.experience-card p {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+/* Section "Compétences" */
+.skills-section {
+    margin-bottom: 3rem;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.skill-type {
+    margin-bottom: 2rem;
+}
+
+.skill-type-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.skills-list {
+    background-color: var(--sp-background-color);
+    list-style-type: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    font-size: 1rem;
+    color: var(--text-color);
+    border-radius: 5px;
+}
+/* Compétences */
+.skills-list li {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.skills-list li a {
+    display: block;
+    width: 100%;
+    color: var(--text-color);
+}
+
+.skills-list li a:hover {
+    color: var(--link-hover-color);
+}
+
+/* Section title */
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--title-color);
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1em;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 2rem;
+    color: var(--title-color);
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+.devlogo {
+    color: var(--primary-color);
+    margin-right: 0.4em;
+}
+
+/* Navigation */
+nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, text-decoration 0.3s ease;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Section des projets */
+.projects-section {
+    margin: 2em 0;
+    padding: 2em;
+    background-color: var(--sp-background-color);
+    border-radius: 10px;
+}
+
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5em;
+}
+
+.project-card {
+    background-color: var(--background-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+}
+
+.project-details {
+    padding: 1em;
+    text-align: left;
+}
+
+.project-details h2 {
+    font-size: 1.5rem;
+    color: var(--title-color);
+}
+
+.project-details p {
+    color: var(--text-color);
+    margin: 0.5em 0;
+}
+
+.project-link {
+    text-decoration: none;
+    color: var(--link-color);
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.project-link:hover {
+    color: var(--link-hover-color);
+}
+
+/* Section Détails du Projet */
+.project-details-section {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--background-color);
+}
+
+.project-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.project-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.project-image img {
+    max-width: 800px; /* Limite la taille maximale de l'image */
+    width: 100%; /* L'image est toujours responsive */
+    max-height: 300px;
+}
+
+.project-description p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.project-additional-info {
+    margin-top: 2rem;
+}
+
+.project-additional-info h2 {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.tech-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.tech-item {
+    font-size: 1rem;
+    padding: 0.5rem;
+    background-color: var(--sp-background-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.tech-item:hover {
+    background-color: var(--link-hover-color);
+    transform: scale(1.05);
+}
+
+.project-date {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-top: 1rem;
+}
+
+.back-to-projects {
+    display: inline-block;
+    margin-top: 2rem;
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 1rem;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.back-to-projects:hover {
+    color: var(--link-hover-color);
+}
+
+
+/* Footer retravaillé légèrement avec des ajouts subtils */
+footer {
+    padding: 20px 10px;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    text-align: center;
+    border-top: 2px solid var(--background-color2);
+}
+
+footer .logo-footer {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--title-color);
+    margin-bottom: 10px;
+}
+
+footer .footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+footer .footer-left,
+footer .footer-right,
+footer .footer-center {
+    flex: 1;
+    margin: 10px;
+}
+
+footer .footer-social ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+footer .footer-social a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+footer .footer-social a:hover {
+    color: var(--link-hover-color);
+}
+
+footer .back-to-top {
+    margin-top: 10px;
+}
+
+footer .back-to-top a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+footer .back-to-top a:hover {
+    color: var(--link-hover-color);
+}
+
+footer .footer-links ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+footer .footer-links a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer .footer-links a:hover {
+    color: var(--link-hover-color);
+}
+
+footer .footer-right {
+    text-align: start;
+}
+
+footer .footer-right p {
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+footer .footer-right ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .footer-right ul li {
+    margin: 5px 0;
+}
+
+footer .footer-right ul li a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+footer .footer-right ul li a:hover {
+    color: var(--link-hover-color);
+}
+
+footer .footer-bottom {
+    border-top: 1px solid var(--background-color2);
+    padding-top: 10px;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+}
+
+footer .footer-bottom a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+footer .footer-bottom a:hover {
+    color: var(--link-hover-color);
+}
+
+footer .footer-bottom p {
+    margin: 5px 0;
+}
+
+/* Container principal du formulaire de contact */
+.contact-container {
+    max-width: 800px;
+    padding: 2rem;
+    margin: 0 auto 2em;
+    background-color: var(--sp-background-color);
+    border-radius: 8px;
+}
+
+/* Formulaire de contact */
+.contact-form {
+    text-align: left;
+}
+
+/* Titre du formulaire */
+.contact-form h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Description du formulaire */
+.contact-form p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+/* Groupes de champs de formulaire */
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+/* Labels des champs de formulaire */
+.form-group label {
+    display: block;
+    font-size: 1rem;
+    color: var(--title-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Inputs et textareas */
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--background-color2);
+    background-color: var(--background-color2);
+    color: var(--text-color);
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.form-textarea {
+    resize: vertical;
+}
+
+/* Bouton de soumission */
+.submit-button {
+    padding: 0.75rem 2rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+.projects-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.project-item {
+    padding: 1rem;
+    border-radius: 5px;
+    max-width: 300px;
+    background-color: var(--sp-background-color);
+}
+
+.project-item h2 {
+}
+
+.project-item p {
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.project-item .btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+    text-decoration: none;
+    color: var(--link-color);
+    font-weight: bold;
+}
+
+/* Dashboard Admin */
+.admin-dashboard {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: var(--title-color);
+}
+
+.actions-container {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.button-add {
+    background-color: #4caf50;
+    color: white;
+}
+
+.button-add:hover {
+    background-color: #45a049;
+}
+
+.button-edit {
+    background-color: #2196f3;
+    color: white;
+}
+
+.button-edit:hover {
+    background-color: #1e88e5;
+}
+
+.button-delete {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 15px;
+}
+
+.button-delete:hover {
+    background-color: #e53935;
+}
+
+/* Table des projets */
+.projects-table-container {
+    overflow-x: auto;
+}
+
+.projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--sp-background-color);
+    border: 1px solid var(--background-color);
+}
+
+.projects-table th,
+.projects-table td {
+    padding: 15px;
+    text-align: left;
+}
+
+.projects-table th {
+    background-color: var(--background-color2);
+    color: var(--text-color);
+}
+
+.projects-table tr:nth-child(even) {
+    background-color: var(--sp-background-color2);
+}
+
+.projects-table tr:hover {
+    background-color: var(--sp-background-color);
+}
+
+/* Formulaire */
+.inline-form {
+    display: inline;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    body {
+        margin: 2em 5em;
+    }
+
+    .logo {
+        font-size: 1.7rem;
+        text-align: center;
+    }
+
+    nav ul {
+        justify-content: center;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-links ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footer-links a {
+        padding: 8px 0;
+    }
+}
+
+/* Responsive Design : Max-width 768px */
+@media screen and (max-width: 768px) {
+    body {
+        margin: 1em 3em;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .logo {
+        font-size: 1.7rem;
+        margin-bottom: 1em;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        padding-left: 0;
+    }
+
+    nav a {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .projects-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .about-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-image img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .cta-button {
+        padding: 1rem 3rem;
+        font-size: 1rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer .footer-left,
+    footer .footer-right,
+    footer .footer-center {
+        text-align: center;
+        margin: 1em 0;
+    }
+
+    footer .footer-social ul {
+        flex-wrap: wrap;
+    }
+
+    footer .footer-links ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero {
+        padding: 3rem 1rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .experience-container,
+    .formation-container,
+    .skills-container,
+    .projects-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-section,
+    .experience-card,
+    .formation-card,
+    .skills-list li,
+    .project-card {
+        width: 100%;
+        margin: 1em 0;
+    }
+
+    .project-image img {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+    }
+
+    .contact-container {
+        margin: 0 auto;
+        padding: 1rem;
+        width: 90%;
+    }
+
+    .contact-form h1 {
+        font-size: 2rem;
+    }
+
+    .contact-form p {
+        font-size: 1rem;
+    }
+
+    .form-input,
+    .form-textarea {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .submit-button {
+        padding: 1rem 3rem;
+        font-size: 1rem;
+    }
+}
+
+/* Responsive Design : Max-width 480px */
+@media screen and (max-width: 480px) {
+    body {
+        margin: 1em 2em;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    nav a {
+        padding: 8px 10px;
+    }
+
+    .cta-button {
+        font-size: 0.9rem;
+        padding: 0.8rem 2rem;
+    }
+
+    .footer-links ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .project-details h2 {
+        font-size: 1.2rem;
+    }
+
+    .tech-item {
+        font-size: 0.9rem;
+    }
+
+    .back-to-projects {
+        font-size: 0.9rem;
+    }
+
+    .footer-bottom {
+        font-size: 0.8rem;
+    }
+}
+

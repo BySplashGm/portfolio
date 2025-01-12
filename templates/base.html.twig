@@ -1,17 +1,83 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }} | Maxime's Portfolio</title>
+    <link rel="icon" href="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    {% block stylesheets %}
+    {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+<body>
+<header id="top">
+    <nav>
+        <div class="logo">
+            <span class="devlogo">&lt;/&gt;</span><span>Maxime's Portfolio</span>
+        </div>
+        <ul>
+            <li><a href="{{ path('index') }}">Accueil</a></li>
+            <li><a href="{{ path('about') }}">À propos</a></li>
+            <li><a href="{{ path('projects') }}">Projets</a></li>
+            <li><a href="{{ path('contact') }}">Contact</a></li>
+        </ul>
+    </nav>
+    {% if app.flashes('success') %}
+        <div class="flash-success">
+            {% for message in app.flashes('success') %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</header>
+
+{% block body %}{% endblock %}
+<footer>
+    <div class="logo-footer">
+        <span>{{ site_name | default('Maxime\'s Portfolio') }}</span>
+    </div>
+    <div class="footer-content">
+        <!-- Section gauche : Réseaux sociaux et retour en haut -->
+        <div class="footer-left">
+            <div class="footer-social">
+                <ul>
+                    <li><a href="https://github.com/BySplashGm" class="social"><i class="fab fa-github"></i> GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/maximevalin/" class="social"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                </ul>
+            </div>
+            <div class="back-to-top">
+                <a href="#top"><i class="fas fa-arrow-up"></i> Retour en haut</a>
+            </div>
+        </div>
+        <!-- Section centrale : Navigation -->
+        <div class="footer-center">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="{{ path('index') }}">Accueil</a></li>
+                    <li><a href="{{ path('about') }}">À propos</a></li>
+                    <li><a href="{{ path('projects') }}">Projets</a></li>
+                    <li><a href="{{ path('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Section droite : Informations supplémentaires -->
+        <div class="footer-right">
+            <p>{{ custom_message | default('Envie de collaborer ? Contactez-moi via la page dédiée ou sur mes réseaux !') }}</p>
+        </div>
+    </div>
+    <!-- Bas de page -->
+    <div class="footer-bottom">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('admin') }}">Panel Admin</a>
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+        {% endif %}
+        <p>&copy; {{ "now"|date("Y") }} {{ site_name | default('Maxime\'s Portfolio') }}. Tous droits réservés.</p>
+    </div>
+</footer>
+</body>
 </html>

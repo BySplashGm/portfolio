@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <section class="skill-projects">
+            <h1>Projets associés à {{ skill.name }}</h1>
+
+            {% if skill.projects is not empty %}
+                <div class="projects-list">
+                    {% for project in skill.projects %}
+                        <div class="project-item">
+                            <h2>{{ project.name }}</h2>
+                            <p>{{ project.description }}</p>
+                            <a href="{{ path('project', { 'id': project.id }) }}" class="btn">Voir le projet</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Aucun projet associé à cette compétence pour le moment.</p>
+            {% endif %}
+        </section>
+    </main>
+{% endblock %}
