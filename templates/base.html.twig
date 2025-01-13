@@ -46,8 +46,8 @@
         <div class="footer-left">
             <div class="footer-social">
                 <ul>
-                    <li><a href="https://github.com/BySplashGm" class="social"><i class="fab fa-github"></i> GitHub</a></li>
-                    <li><a href="https://www.linkedin.com/in/maximevalin/" class="social"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="https://github.com/BySplashGm" target="_blank" class="social"><i class="fab fa-github"></i> GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/maximevalin/" target="_blank" class="social"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
                 </ul>
             </div>
             <div class="back-to-top">
@@ -73,7 +73,7 @@
     <!-- Bas de page -->
     <div class="footer-bottom">
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('admin') }}">Panel Admin</a>
+            <a href="{{ path('admin') }}" target="_blank">Panel Admin</a>
             <a href="{{ path('app_logout') }}">Déconnexion</a>
         {% endif %}
         <p>&copy; {{ "now"|date("Y") }} {{ site_name | default('Maxime\'s Portfolio') }}. Tous droits réservés.</p>

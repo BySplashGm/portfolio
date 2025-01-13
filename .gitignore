@@ -32,5 +32,5 @@
 .env
 .env.dev
 .env.test
-.env.dev.local
+.env
 .env*

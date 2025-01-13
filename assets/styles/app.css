@@ -165,6 +165,10 @@ body {
     color: var(--secondary-color);
 }
 
+.formation-card a {
+    text-decoration: none;
+}
+
 .formation-card p {
     font-size: 1rem;
     color: var(--text-color);
