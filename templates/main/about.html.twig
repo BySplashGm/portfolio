@@ -47,7 +47,7 @@
                     <div class="experience-card">
                         <h3>{{ experience.label }}</h3>
                         <p>
-                            {{ experience.description|slice(0, 150) }}... <!-- Limite à 150 caractères -->
+                            {{ experience.description|slice(0, 150) }}...
                         </p>
                         <a href="{{ path('experience_show', {'id': experience.id}) }}" class="experience-link">En savoir plus</a>
                     </div>
@@ -67,7 +67,7 @@
                             {% for skill in skills %}
                                 {% if skill.type.id == skillType.id %}
                                     <li>
-                                        <a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.label }}</a>
+                                        <a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.name }}</a>
                                     </li>
                                 {% endif %}
                             {% endfor %}

@@ -25,9 +25,6 @@ class Skill
     #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'skills')]
     private Collection $projects;
 
-    #[ORM\Column(length: 255)]
-    private ?string $label = null;
-
     #[ORM\ManyToOne(inversedBy: 'skills')]
     #[ORM\JoinColumn(nullable: false)]
     private ?SkillType $type = null;
@@ -35,9 +32,16 @@ class Skill
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
+    /**
+     * @var Collection<int, Experience>
+     */
+    #[ORM\ManyToMany(targetEntity: Experience::class, inversedBy: 'skills')]
+    private Collection $experiences;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
+        $this->experiences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,18 +88,6 @@ class Skill
         return $this;
     }
 
-    public function getLabel(): ?string
-    {
-        return $this->label;
-    }
-
-    public function setLabel(string $label): static
-    {
-        $this->label = $label;
-
-        return $this;
-    }
-
     public function getType(): ?SkillType
     {
         return $this->type;
@@ -116,6 +108,30 @@ class Skill
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Experience>
+     */
+    public function getExperiences(): Collection
+    {
+        return $this->experiences;
+    }
+
+    public function addExperience(Experience $experience): static
+    {
+        if (!$this->experiences->contains($experience)) {
+            $this->experiences->add($experience);
+        }
+
+        return $this;
+    }
+
+    public function removeExperience(Experience $experience): static
+    {
+        $this->experiences->removeElement($experience);
 
         return $this;
     }

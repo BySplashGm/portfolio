@@ -22,6 +22,6 @@ class ProjectController extends AbstractController
     #[Route('/projects/{id}', name: 'project')]
     public function show(EntityManagerInterface $entityManager, $id): Response {
         $project = $entityManager->getRepository(Project::class)->find($id);
-        return $this->render('project/show.html.twig', ['title' => 'Projet', 'project' => $project]);
+        return $this->render('project/show.html.twig', ['title' => $project->getName(), 'project' => $project]);
     }
 }

@@ -668,6 +668,16 @@ footer .footer-bottom p {
     transform: scale(1.05);
 }
 
+.skill-projects {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.skill-experiences {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
 .projects-list {
     display: flex;
     flex-wrap: wrap;

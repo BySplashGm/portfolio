@@ -21,8 +21,8 @@ class Project
     #[ORM\Column(length: 1500)]
     private ?string $description = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $createdAt = null;
 
     #[ORM\Column(length: 255)]
     private ?string $status = null;
@@ -33,14 +33,14 @@ class Project
     #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'projects')]
     private Collection $skills;
 
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imagePath = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $link = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $repolink = null;
 
     public function __construct()
     {
@@ -76,12 +76,12 @@ class Project
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTime $createdAt): static
     {
         $this->createdAt = $createdAt;
 
@@ -124,18 +124,6 @@ class Project
         return $this;
     }
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): static
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
     public function getImagePath(): ?string
     {
         return $this->imagePath;
@@ -156,6 +144,18 @@ class Project
     public function setLink(string $link): static
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    public function getRepolink(): ?string
+    {
+        return $this->repolink;
+    }
+
+    public function setRepolink(string $repolink): static
+    {
+        $this->repolink = $repolink;
 
         return $this;
     }
