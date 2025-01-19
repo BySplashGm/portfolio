@@ -485,7 +485,7 @@ footer .footer-center {
     margin: 10px;
 }
 
-footer .footer-social ul {
+footer .footer-socials ul {
     list-style: none;
     display: flex;
     gap: 15px;
@@ -493,14 +493,14 @@ footer .footer-social ul {
     margin-bottom: 10px;
 }
 
-footer .footer-social a {
+footer .footer-socials a {
     color: var(--link-color);
     text-decoration: none;
     font-size: 1.2rem;
     transition: color 0.3s ease;
 }
 
-footer .footer-social a:hover {
+footer .footer-socials a:hover {
     color: var(--link-hover-color);
 }
 
@@ -899,7 +899,7 @@ footer .footer-bottom p {
         margin: 1em 0;
     }
 
-    footer .footer-social ul {
+    footer .footer-socials ul {
         flex-wrap: wrap;
     }
 
