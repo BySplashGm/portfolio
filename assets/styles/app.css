@@ -326,7 +326,6 @@ nav a:hover {
 .projects-container {
     display: flex;
     flex-wrap: wrap;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5em;
 }
 
@@ -334,9 +333,9 @@ nav a:hover {
     background-color: var(--background-color);
     border-radius: 10px;
     overflow: hidden;
-    max-width: 30%;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 30%;
 }
 
 .project-card:hover {
@@ -393,9 +392,7 @@ nav a:hover {
 }
 
 .project-image img {
-    max-width: 800px; /* Limite la taille maximale de l'image */
-    width: 100%; /* L'image est toujours responsive */
-    max-height: 300px;
+    width: 100%;
 }
 
 .project-description p {
@@ -867,10 +864,6 @@ footer .footer-bottom p {
         width: 100%;
         padding: 10px;
         text-align: center;
-    }
-
-    .projects-container {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 
     .about-container {
