@@ -26,13 +26,13 @@
             <h2 class="section-title">Formation</h2>
             <div class="formation-container">
                 <div class="formation-card">
-                    <h3>BTS SIO [2023-Aujourd'hui]</h3>
+                    <a href="https://coliniere.paysdelaloire.e-lyco.fr/" target="_blank"><h3>BTS SIO [2023-Aujourd'hui]</h3></a>
                     <p>
                         Actuellement en deuxième année de BTS SIO (Services Informatiques aux Organisations) & Cybersécurité, en spécialité SLAM (Solutions Logicielles et Applications Métiers). Passionné par le développement logiciel, je me forme aux technologies utilisées pour concevoir des solutions informatiques adaptées aux besoins des entreprises.
                     </p>
                 </div>
                 <div class="formation-card">
-                    <h3>Baccalauréat Général [2020-2023]</h3>
+                    <a href="https://caroline-aigle.paysdelaloire.e-lyco.fr/" target="_blank"><h3>Baccalauréat Général [2020-2023]</h3></a>
                     <p>
                         J'ai obtenu un bac général avec la spécialité AMC (Anglais Monde Contemporain) et NSI (Numérique et Sciences Informatiques), accompagné de l'option Mathématiques Complémentaires et Euro. NSI est une spécialité qui m'a permis d'approfondir mes connaissances en informatique, en programmation et en algorithmique, tout en développant une compréhension des enjeux du numérique dans notre société.
                     </p>
@@ -47,7 +47,7 @@
                     <div class="experience-card">
                         <h3>{{ experience.label }}</h3>
                         <p>
-                            {{ experience.description|slice(0, 150) }}... <!-- Limite à 150 caractères -->
+                            {{ experience.description|slice(0, 150) }}...
                         </p>
                         <a href="{{ path('experience_show', {'id': experience.id}) }}" class="experience-link">En savoir plus</a>
                     </div>
@@ -67,7 +67,7 @@
                             {% for skill in skills %}
                                 {% if skill.type.id == skillType.id %}
                                     <li>
-                                        <a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.label }}</a>
+                                        <a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.name }}</a>
                                     </li>
                                 {% endif %}
                             {% endfor %}

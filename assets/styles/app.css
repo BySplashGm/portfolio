@@ -165,6 +165,10 @@ body {
     color: var(--secondary-color);
 }
 
+.formation-card a {
+    text-decoration: none;
+}
+
 .formation-card p {
     font-size: 1rem;
     color: var(--text-color);
@@ -662,6 +666,16 @@ footer .footer-bottom p {
 .submit-button:hover {
     background-color: var(--secondary-color);
     transform: scale(1.05);
+}
+
+.skill-projects {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.skill-experiences {
+    margin-top: 2em;
+    margin-bottom: 2em;
 }
 
 .projects-list {

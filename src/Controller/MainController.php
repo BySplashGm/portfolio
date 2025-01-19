@@ -28,7 +28,7 @@ class MainController extends AbstractController
         $experiences = $entityManager->getRepository(Experience::class)->findAll();
         $skills = $entityManager->getRepository(Skill::class)->findAll();
         $skillTypes = $entityManager->getRepository(SkillType::class)->findAll();
-        return $this->render('main/about.html.twig', ['title' => 'A propos', 'skills' => $skills, 'skillTypes' => $skillTypes, 'experiences' => $experiences]);
+        return $this->render('main/about.html.twig', ['title' => 'À propos', 'skills' => $skills, 'skillTypes' => $skillTypes, 'experiences' => $experiences]);
     }
 
     #[Route('/contact', name: 'contact')]

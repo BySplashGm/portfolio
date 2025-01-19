@@ -19,5 +19,22 @@
                 <p>Aucun projet associé à cette compétence pour le moment.</p>
             {% endif %}
         </section>
+        <section class="skill-experiences">
+            <h1>Expériences associées à {{ skill.name }}</h1>
+
+            {% if skill.experiences is not empty %}
+                <div class="projects-list">
+                    {% for experience in skill.experiences %}
+                        <div class="project-item">
+                            <h2>{{ experience.label }}</h2>
+                            <p>{{ experience.description }}</p>
+                            <a href="{{ path('experience_show', { 'id': experience.id }) }}" class="btn">Voir l'expérience</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Aucune expérience associée à cette compétence pour le moment.</p>
+            {% endif %}
+        </section>
     </main>
 {% endblock %}
