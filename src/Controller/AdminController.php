@@ -277,7 +277,7 @@ class AdminController extends AbstractController
 
         $data['link'] != null ? $project->setLink($data['link']) : null;
         $data['imagePath'] != null ? $project->setImagePath($data['imagePath']) : null;
-        $data['repolink'] != null ? $project->setLink($data['repolink']) : null;
+        $data['repolink'] != null ? $project->setRepolink($data['repolink']) : null;
         $entityManager->persist($project);
         $entityManager->flush();
     }
