@@ -60,11 +60,10 @@ class AdminController extends AbstractController
             ->add('status', ChoiceType::class, [
                 'label' => 'Statut',
                 'choices' => [
-                    'En cours' => 'en_cours',
-                    'Terminé' => 'termine',
-                    'Abandonné' => 'abandonne',
+                    'En cours' => 'En cours',
+                    'Terminé' => 'Terminé',
+                    'Abandonné' => 'Abandonné',
                 ],
-                'placeholder' => 'Sélectionnez un statut',
                 'required' => true,
             ])
             ->add('skills', EntityType::class, [
@@ -72,7 +71,7 @@ class AdminController extends AbstractController
                 'class' => Skill::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true, // Si tu veux des cases à cocher
+                'expanded' => true,
             ])
             ->add('imagePath', TextType::class, [
                 'label' => 'Image',
@@ -106,12 +105,7 @@ class AdminController extends AbstractController
             $data = $form->getData();
             $project = new Project();
             $this->extracted($project, $data, $entityManager);
-
-            foreach ($data['skills'] as $skill) {
-                $project->addSkill($skill);
-            }
-
-            $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin');
         }
 
         $skills = $entityManager->getRepository(Skill::class)->findAll();
@@ -274,6 +268,10 @@ class AdminController extends AbstractController
         $project->setDescription($data['description']);
         $project->setCreatedAt($data['createdAt']);
         $project->setStatus($data['status']);
+
+        foreach ($data['skills'] as $skill) {
+            $project->addSkill($skill);
+        }
 
         $data['link'] != null ? $project->setLink($data['link']) : null;
         $data['imagePath'] != null ? $project->setImagePath($data['imagePath']) : null;
