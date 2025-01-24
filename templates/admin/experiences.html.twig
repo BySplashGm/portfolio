@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <section class="admin-dashboard">
+            <h1 class="dashboard-title">Tableau de bord - Expériences</h1>
+            <a href="{{ path('admin') }}">Retour</a>
+
+            <div class="actions-container">
+                <a href="{{ path('newexperience') }}" class="button button-add">Ajouter une expérience</a>
+            </div>
+
+            <div class="projects-table-container">
+                {% if experiences is not empty %}
+                    <table class="projects-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Entreprise</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for experience in experiences %}
+                            <tr>
+                                <td>{{ experience.id }}</td>
+                                <td>{{ experience.label }}</td>
+                                <td>{{ experience.description|length > 50 ? experience.description[:50] ~ '...' : experience.description }}</td>
+                                <td>{{ experience.company }}</td>
+                                <td>
+                                    <a href="{{ path('admin', {id: experience.id}) }}" class="button button-edit">Modifier</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Aucune expérience trouvée. Vous pouvez en ajouter une à l'aide du bouton ci-dessus.</p>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+{% endblock %}
