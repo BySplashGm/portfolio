@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Experience;
+use App\Entity\Message;
 use App\Entity\Project;
 use App\Entity\Skill;
 use App\Entity\SkillType;
@@ -28,12 +30,32 @@ class AdminController extends AbstractController
     #[Route('/admin', name: 'admin')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $projects = $entityManager->getRepository(Project::class)->findAll();
-        $skills = $entityManager->getRepository(Skill::class)->findAll();
-        return $this->render('admin/index.html.twig', ['title' => "Panel administrateur", 'projects' => $projects, 'skills' => $skills]);
+        $messages = $entityManager->getRepository(Message::class)->findAll();
+        return $this->render('admin/index.html.twig', ['title' => "Panel administrateur", 'messages' => $messages]);
     }
 
-    #[Route('/admin/newproject', name: 'newproject')]
+    #[Route('/admin/projects', name: 'admin_projects')]
+    public function projects(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $projects = $entityManager->getRepository(Project::class)->findAll();
+        return $this->render('admin/projects.html.twig', ['title' => "Panel administrateur", 'projects' => $projects]);
+    }
+
+    #[Route('/admin/skills', name: 'admin_skills')]
+    public function skills(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $skills = $entityManager->getRepository(Skill::class)->findAll();
+        return $this->render('admin/skills.html.twig', ['title' => "Panel administrateur", 'skills' => $skills]);
+    }
+
+    #[Route('/admin/experiences', name: 'admin_experiences')]
+    public function experiences(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $experiences = $entityManager->getRepository(Experience::class)->findAll();
+        return $this->render('admin/experiences.html.twig', ['title' => "Panel administrateur", 'experiences' => $experiences]);
+    }
+
+    #[Route('/admin/projects/new', name: 'newproject')]
     public function newproject(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, Request $request): Response
     {
 
@@ -60,11 +82,10 @@ class AdminController extends AbstractController
             ->add('status', ChoiceType::class, [
                 'label' => 'Statut',
                 'choices' => [
-                    'En cours' => 'en_cours',
-                    'Terminé' => 'termine',
-                    'Abandonné' => 'abandonne',
+                    'En cours' => 'En cours',
+                    'Terminé' => 'Terminé',
+                    'Abandonné' => 'Abandonné',
                 ],
-                'placeholder' => 'Sélectionnez un statut',
                 'required' => true,
             ])
             ->add('skills', EntityType::class, [
@@ -72,7 +93,7 @@ class AdminController extends AbstractController
                 'class' => Skill::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true, // Si tu veux des cases à cocher
+                'expanded' => true,
             ])
             ->add('imagePath', TextType::class, [
                 'label' => 'Image',
@@ -106,19 +127,14 @@ class AdminController extends AbstractController
             $data = $form->getData();
             $project = new Project();
             $this->extracted($project, $data, $entityManager);
-
-            foreach ($data['skills'] as $skill) {
-                $project->addSkill($skill);
-            }
-
-            $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin');
         }
 
         $skills = $entityManager->getRepository(Skill::class)->findAll();
         return $this->render('admin/newproject.html.twig', ['title' => "Ajout d'un projet", 'skills' => $skills, 'form' => $form]);
     }
 
-    #[Route('/admin/project/{id}', name: 'editproject', methods: ['GET', 'POST'])]
+    #[Route('/admin/projects/{id}', name: 'editproject', methods: ['GET', 'POST'])]
     public function editproject($id, EntityManagerInterface $entityManager, Request $request, FormFactoryInterface $formFactory): Response
     {
         $project = $entityManager->getRepository(Project::class)->find($id);
@@ -262,6 +278,80 @@ class AdminController extends AbstractController
         return $this->render('admin/editskill.html.twig', ['title' => "Édition " . $skill->getName(), 'skill' => $skill, 'form' => $form]);
     }
 
+    #[Route('/admin/experiences/new', name: 'newexperience', methods: ['GET', 'POST'])]
+    public function newexperience(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, Request $request): Response
+    {
+        $form = $formFactory->createBuilder()
+            ->add('label', TextType::class, [
+                'label' => "Nom de l'expérience",
+                'required' => true,
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description',
+                'required' => true,
+            ])
+            ->add('company', TextType::class, [
+                'label' => 'Entreprise',
+                'required' => true,
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Enregistrer',
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $experience = new Experience();
+            $experience->setLabel($data['label']);
+            $experience->setCompany($data['company']);
+            $experience->setDescription($data['description']);
+            $entityManager->persist($experience);
+            $entityManager->flush();
+            return $this->redirectToRoute('admin_experiences');
+        }
+        return $this->render('admin/newexperience.html.twig', ['title' => "Ajout d'une expérience", 'form' => $form]);
+    }
+
+    #[Route('/admin/experiences/{id}', name: 'editexperience', methods: ['GET', 'POST'])]
+    public function editexperience($id, EntityManagerInterface $entityManager, Request $request, FormFactoryInterface $formFactory): Response
+    {
+        $experience = $entityManager->getRepository(Experience::class)->find($id);
+        $form = $formFactory->createBuilder()
+            ->add('label', TextType::class, [
+                'label' => "Nom de l'expérience",
+                'required' => true,
+                'data' => $experience->getLabel(),
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description',
+                'required' => true,
+                'data' => $experience->getLabel(),
+            ])
+            ->add('company', TextType::class, [
+                'label' => 'Entreprise',
+                'required' => true,
+                'data' => $experience->getCompany(),
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Enregistrer',
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $experience->setLabel($data['label']);
+            $experience->setCompany($data['company']);
+            $experience->setDescription($data['description']);
+            $entityManager->persist($experience);
+            $entityManager->flush();
+            return $this->redirectToRoute('admin_experiences');
+        }
+        $experience = $entityManager->getRepository(Experience::class)->find($id);
+        return $this->render('editexperience.html.twig', ["Édition " . $experience->getLabel(), 'experience' => $experience, 'form' => $form ]);
+    }
+
     /**
      * @param Project $project
      * @param mixed $data
@@ -274,6 +364,10 @@ class AdminController extends AbstractController
         $project->setDescription($data['description']);
         $project->setCreatedAt($data['createdAt']);
         $project->setStatus($data['status']);
+
+        foreach ($data['skills'] as $skill) {
+            $project->addSkill($skill);
+        }
 
         $data['link'] != null ? $project->setLink($data['link']) : null;
         $data['imagePath'] != null ? $project->setImagePath($data['imagePath']) : null;
