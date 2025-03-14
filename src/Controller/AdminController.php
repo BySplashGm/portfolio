@@ -326,7 +326,7 @@ class AdminController extends AbstractController
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'required' => true,
-                'data' => $experience->getLabel(),
+                'data' => $experience->getDescription(),
             ])
             ->add('company', TextType::class, [
                 'label' => 'Entreprise',
