@@ -30,7 +30,7 @@
                                 <td>{{ experience.description|length > 50 ? experience.description[:50] ~ '...' : experience.description }}</td>
                                 <td>{{ experience.company }}</td>
                                 <td>
-                                    <a href="{{ path('admin', {id: experience.id}) }}" class="button button-edit">Modifier</a>
+                                    <a href="{{ path('editexperience', {id: experience.id}) }}" class="button button-edit">Modifier</a>
                                 </td>
                             </tr>
                         {% endfor %}

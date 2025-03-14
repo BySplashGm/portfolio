@@ -349,7 +349,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin_experiences');
         }
         $experience = $entityManager->getRepository(Experience::class)->find($id);
-        return $this->render('editexperience.html.twig', ["Édition " . $experience->getLabel(), 'experience' => $experience, 'form' => $form ]);
+        return $this->render('admin/editexperience.html.twig', ["title" => "Édition " . $experience->getLabel(), 'experience' => $experience, 'form' => $form ]);
     }
 
     /**
