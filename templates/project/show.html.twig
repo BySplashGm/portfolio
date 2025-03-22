@@ -9,7 +9,7 @@
                     <img src="{{ asset(project.imagePath) }}" alt="{{ project.name }}">
                 </div>
                 <div class="project-description">
-                    <p>{{ project.description }}</p>
+                    {{ content|raw }}
                 </div>
             </div>
             <div class="project-additional-info">

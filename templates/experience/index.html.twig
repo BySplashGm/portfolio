@@ -4,7 +4,7 @@
     <main>
         <section class="experience-detail-section">
             <h1 class="section-title">{{ experience.label }}</h1>
-            <p>{{ experience.description }}</p>
+            <div>{{ content|raw }}</div>
             <p>Entreprise: {{ experience.company }}</p>
         </section>
     </main>

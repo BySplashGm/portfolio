@@ -71,10 +71,11 @@ class AdminController extends AbstractController
                 'label' => 'Description',
                 'required' => true,
                 'attr' => [
+                    'rows' => 25,
                     'placeholder' => 'Entrez une description',
                 ],
             ])
-            ->add('shortDescription', TextareaType::class, [
+            ->add('shortDescription', TextType::class, [
                 'label' => 'Courte Description',
                 'required' => true,
                 'attr' => [
@@ -133,8 +134,9 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $project = new Project();
+            $project->setShortDescription($data['shortDescription']);
             $this->extracted($project, $data, $entityManager);
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin_projects');
         }
 
         $skills = $entityManager->getRepository(Skill::class)->findAll();
@@ -153,6 +155,9 @@ class AdminController extends AbstractController
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
+                'attr' => [
+                    'rows' => 25,
+                ],
                 'required' => true,
                 'data' => $project->getDescription(),
             ])
@@ -206,8 +211,9 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            $project->setShortDescription($data['shortDescription']);
             $this->extracted($project, $data, $entityManager);
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin_projects');
         }
         $skills = $entityManager->getRepository(Skill::class)->findAll();
         return $this->render('admin/editproject.html.twig', ['title' => "Édition " . $project->getName(), 'project' => $project, 'skills' => $skills, 'form' => $form->createView()]);
@@ -245,7 +251,7 @@ class AdminController extends AbstractController
 
             $entityManager->persist($skill);
             $entityManager->flush();
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin_skills');
         }
         return $this->render('admin/newskill.html.twig', ['title' => "Ajout d'une compétence", 'form' => $form]);
     }
@@ -284,7 +290,7 @@ class AdminController extends AbstractController
 
             $entityManager->persist($skill);
             $entityManager->flush();
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin_skills');
         }
 
         return $this->render('admin/editskill.html.twig', ['title' => "Édition " . $skill->getName(), 'skill' => $skill, 'form' => $form]);
@@ -300,6 +306,9 @@ class AdminController extends AbstractController
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
+                'attr' => [
+                    'rows' => 25,
+                ],
                 'required' => true,
             ])
             ->add('shortDescription', TextareaType::class, [
@@ -341,8 +350,11 @@ class AdminController extends AbstractController
                 'data' => $experience->getLabel(),
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description',
+                'label' => 'Contenu',
                 'required' => true,
+                'attr' => [
+                    'rows' => 25,
+                ],
                 'data' => $experience->getDescription(),
             ])
             ->add('shortDescription', TextType::class, [

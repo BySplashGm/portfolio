@@ -48,7 +48,7 @@
                     <div class="experience-card">
                         <h3>{{ experience.label }}</h3>
                         <p>
-                            {{ experience.shortDescription|slice(0, 150) }}...
+                            {{ experience.shortDescription }}
                         </p>
                         <a href="{{ path('experience_show', {'id': experience.id}) }}" class="experience-link">En savoir plus</a>
                     </div>
