@@ -18,6 +18,7 @@
                     <p>
                         En dehors de mes études, j'aime explorer de nouveaux outils, jouer à des jeux vidéo, et apprendre des nouvelles technologies. Ce portfolio est un reflet de mon travail et de mes réalisations.
                     </p>
+                    <a class="experience-link" href="{{ asset('Maxime VALIN - CV - maximeval.in .pdf') }}">CV Téléchargeable</a>
                 </div>
             </div>
         </section>
@@ -47,7 +48,7 @@
                     <div class="experience-card">
                         <h3>{{ experience.label }}</h3>
                         <p>
-                            {{ experience.description|slice(0, 150) }}...
+                            {{ experience.shortDescription|slice(0, 150) }}...
                         </p>
                         <a href="{{ path('experience_show', {'id': experience.id}) }}" class="experience-link">En savoir plus</a>
                     </div>

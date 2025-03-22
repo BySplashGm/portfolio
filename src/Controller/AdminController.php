@@ -74,6 +74,13 @@ class AdminController extends AbstractController
                     'placeholder' => 'Entrez une description',
                 ],
             ])
+            ->add('shortDescription', TextareaType::class, [
+                'label' => 'Courte Description',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Entrez une courte description',
+                ],
+            ])
             ->add('createdAt', DateType::class, [
                 'label' => 'Date de création',
                 'widget' => 'single_text',
@@ -148,6 +155,11 @@ class AdminController extends AbstractController
                 'label' => 'Description',
                 'required' => true,
                 'data' => $project->getDescription(),
+            ])
+            ->add('shortDescription', TextType::class, [
+                'label' => 'Courte Description',
+                'required' => true,
+                'data' => $project->getShortDescription(),
             ])
             ->add('createdAt', DateType::class, [
                 'label' => 'Date',
@@ -290,6 +302,10 @@ class AdminController extends AbstractController
                 'label' => 'Description',
                 'required' => true,
             ])
+            ->add('shortDescription', TextareaType::class, [
+                'label' => 'Courte Description',
+                'required' => true,
+            ])
             ->add('company', TextType::class, [
                 'label' => 'Entreprise',
                 'required' => true,
@@ -306,6 +322,7 @@ class AdminController extends AbstractController
             $experience->setLabel($data['label']);
             $experience->setCompany($data['company']);
             $experience->setDescription($data['description']);
+            $experience->setShortDescription($data['shortDescription']);
             $entityManager->persist($experience);
             $entityManager->flush();
             return $this->redirectToRoute('admin_experiences');
@@ -328,6 +345,11 @@ class AdminController extends AbstractController
                 'required' => true,
                 'data' => $experience->getDescription(),
             ])
+            ->add('shortDescription', TextType::class, [
+                'label' => 'Courte Description',
+                'required' => true,
+                'data' => $experience->getShortDescription(),
+            ])
             ->add('company', TextType::class, [
                 'label' => 'Entreprise',
                 'required' => true,
@@ -344,6 +366,7 @@ class AdminController extends AbstractController
             $experience->setLabel($data['label']);
             $experience->setCompany($data['company']);
             $experience->setDescription($data['description']);
+            $experience->setShortDescription($data['shortDescription']);
             $entityManager->persist($experience);
             $entityManager->flush();
             return $this->redirectToRoute('admin_experiences');
