@@ -31,6 +31,9 @@ class Experience
     #[ORM\ManyToMany(targetEntity: Skill::class, mappedBy: 'experiences')]
     private Collection $skills;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $shortDescription = null;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
@@ -100,6 +103,18 @@ class Experience
         if ($this->skills->removeElement($skill)) {
             $skill->removeExperience($this);
         }
+
+        return $this;
+    }
+
+    public function getShortDescription(): ?string
+    {
+        return $this->shortDescription;
+    }
+
+    public function setShortDescription(string $shortDescription): static
+    {
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
