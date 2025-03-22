@@ -14,6 +14,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -134,8 +135,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $project = new Project();
-            $project->setShortDescription($data['shortDescription']);
-            $this->extracted($project, $data, $entityManager);
+            $this->extractedProject($project, $data, $entityManager);
             return $this->redirectToRoute('admin_projects');
         }
 
@@ -211,12 +211,10 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $project->setShortDescription($data['shortDescription']);
-            $this->extracted($project, $data, $entityManager);
+            $this->extractedProject($project, $data, $entityManager);
             return $this->redirectToRoute('admin_projects');
         }
-        $skills = $entityManager->getRepository(Skill::class)->findAll();
-        return $this->render('admin/editproject.html.twig', ['title' => "Édition " . $project->getName(), 'project' => $project, 'skills' => $skills, 'form' => $form->createView()]);
+        return $this->render('admin/editproject.html.twig', ['title' => "Édition " . $project->getName(), 'form' => $form->createView()]);
     }
 
     #[Route('/admin/newskill', name: 'newskill', methods: ['GET', 'POST'])]
@@ -261,7 +259,7 @@ class AdminController extends AbstractController
         $skill = $entityManager->getRepository(Skill::class)->find($id);
         $form = $formFactory->createBuilder()
             ->add('name', TextType::class, [
-                'label' => 'Nom du projet',
+                'label' => 'Nom de la compétence',
                 'required' => true,
                 'data' => $skill->getName(),
             ])
@@ -315,6 +313,13 @@ class AdminController extends AbstractController
                 'label' => 'Courte Description',
                 'required' => true,
             ])
+            ->add('skills', EntityType::class, [
+                'label' => 'Compétences',
+                'class' => Skill::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+            ])
             ->add('company', TextType::class, [
                 'label' => 'Entreprise',
                 'required' => true,
@@ -328,12 +333,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $experience = new Experience();
-            $experience->setLabel($data['label']);
-            $experience->setCompany($data['company']);
-            $experience->setDescription($data['description']);
-            $experience->setShortDescription($data['shortDescription']);
-            $entityManager->persist($experience);
-            $entityManager->flush();
+            $this->extractedExperience($experience, $data, $entityManager);
             return $this->redirectToRoute('admin_experiences');
         }
         return $this->render('admin/newexperience.html.twig', ['title' => "Ajout d'une expérience", 'form' => $form]);
@@ -343,11 +343,14 @@ class AdminController extends AbstractController
     public function editexperience($id, EntityManagerInterface $entityManager, Request $request, FormFactoryInterface $formFactory): Response
     {
         $experience = $entityManager->getRepository(Experience::class)->find($id);
-        $form = $formFactory->createBuilder()
+        if (!$experience) {
+            throw $this->createNotFoundException("L'expérience demandée n'existe pas.");
+        }
+
+        $form = $formFactory->createBuilder(FormType::class, $experience)
             ->add('label', TextType::class, [
                 'label' => "Nom de l'expérience",
                 'required' => true,
-                'data' => $experience->getLabel(),
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Contenu',
@@ -355,17 +358,22 @@ class AdminController extends AbstractController
                 'attr' => [
                     'rows' => 25,
                 ],
-                'data' => $experience->getDescription(),
             ])
             ->add('shortDescription', TextType::class, [
                 'label' => 'Courte Description',
                 'required' => true,
-                'data' => $experience->getShortDescription(),
+            ])
+            ->add('skills', EntityType::class, [
+                'label' => 'Compétences',
+                'class' => Skill::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false,
             ])
             ->add('company', TextType::class, [
                 'label' => 'Entreprise',
                 'required' => true,
-                'data' => $experience->getCompany(),
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',
@@ -374,18 +382,19 @@ class AdminController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $experience->setLabel($data['label']);
-            $experience->setCompany($data['company']);
-            $experience->setDescription($data['description']);
-            $experience->setShortDescription($data['shortDescription']);
             $entityManager->persist($experience);
             $entityManager->flush();
+
             return $this->redirectToRoute('admin_experiences');
         }
-        $experience = $entityManager->getRepository(Experience::class)->find($id);
-        return $this->render('admin/editexperience.html.twig', ["title" => "Édition " . $experience->getLabel(), 'experience' => $experience, 'form' => $form ]);
+
+        return $this->render('admin/editexperience.html.twig', [
+            "title" => "Édition " . $experience->getLabel(),
+            'experience' => $experience,
+            'form' => $form->createView(),
+        ]);
     }
+
 
     /**
      * @param Project $project
@@ -393,10 +402,11 @@ class AdminController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return void
      */
-    public function extracted(Project $project, mixed $data, EntityManagerInterface $entityManager): void
+    public function extractedProject(Project $project, mixed $data, EntityManagerInterface $entityManager): void
     {
         $project->setName($data['name']);
         $project->setDescription($data['description']);
+        $project->setShortDescription($data['shortDescription']);
         $project->setCreatedAt($data['createdAt']);
         $project->setStatus($data['status']);
 
@@ -410,4 +420,25 @@ class AdminController extends AbstractController
         $entityManager->persist($project);
         $entityManager->flush();
     }
+
+    public function extractedExperience(Experience $experience, mixed $data, EntityManagerInterface $entityManager): void
+    {
+        $experience->setLabel($data['label']);
+        $experience->setCompany($data['company']);
+        $experience->setDescription($data['description']);
+        $experience->setShortDescription($data['shortDescription']);
+
+
+        if (isset($data['skills']) && is_iterable($data['skills'])) {
+            foreach ($data['skills'] as $skill) {
+                $experience->addSkill($skill);
+            }
+        }
+
+        $entityManager->persist($experience);
+        $entityManager->flush();
+    }
+
+
+
 }
