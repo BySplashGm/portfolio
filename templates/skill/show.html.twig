@@ -10,7 +10,7 @@
                     {% for project in skill.projects %}
                         <div class="project-item">
                             <h2>{{ project.name }}</h2>
-                            <p>{{ project.description }}</p>
+                            <p>{{ project.shortDescription }}</p>
                             <a href="{{ path('project', { 'id': project.id }) }}" class="btn">Voir le projet</a>
                         </div>
                     {% endfor %}
@@ -27,7 +27,7 @@
                     {% for experience in skill.experiences %}
                         <div class="project-item">
                             <h2>{{ experience.label }}</h2>
-                            <p>{{ experience.description }}</p>
+                            <p>{{ experience.shortDescription }}</p>
                             <a href="{{ path('experience_show', { 'id': experience.id }) }}" class="btn">Voir l'expérience</a>
                         </div>
                     {% endfor %}
