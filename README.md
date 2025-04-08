@@ -4,8 +4,7 @@ Welcome to my personal **portfolio**, built with **Symfony 7** and designed to p
 
 ## 🌐 Live Demo
 
-- Main Portfolio: [https://maximeval.in](https://maximeval.in)
-- Terminal Version: [https://terminal.maximeval.in](https://terminal.maximeval.in)
+- [https://maximeval.in](https://maximeval.in)
 
 ## 🧰 Tech Stack
 
