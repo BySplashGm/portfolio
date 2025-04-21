@@ -2,18 +2,29 @@
 
 {% block body %}
     <main>
-        <section class="experience-detail-section">
-            <h1 class="section-title">{{ experience.label }}</h1>
-            <div>{{ content|raw }}</div>
-            <p>Entreprise: {{ experience.company }}</p>
-            {% if experience.skills is not empty %}
-                <h2>Compétences</h2>
-                <ul class="skills-list">
-                    {% for skill in experience.skills %}
-                        <li><a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+        <section class="details-section">
+            <h1 class="details-title">{{ experience.label }}</h1>
+
+            <div class="details-content">
+                <div class="project-description">
+                    <div class="rich-content">{{ content|raw }}</div>
+                </div>
+
+                <div class="details-additional-info">
+                    <p class="experience-company">Entreprise : {{ experience.company }}</p>
+
+                    {% if experience.skills is not empty %}
+                        <h2>Compétences</h2>
+                        <ul class="skills-list">
+                            {% for skill in experience.skills %}
+                                <li><a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+
+            <a href="{{ path('about') }}" class="back-to-projects">Retour aux expériences</a>
         </section>
     </main>
 {% endblock %}
