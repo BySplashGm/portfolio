@@ -2,24 +2,26 @@
 
 {% block body %}
     <main>
-        <section class="project-details-section">
-            <h1 class="project-title">{{ project.name }}</h1>
-            <div class="project-content">
+        <section class="details-section">
+            <h1 class="details-title">{{ project.name }}</h1>
+            <div class="details-content">
                 <div class="project-image">
                     <img src="{{ asset(project.imagePath) }}" alt="{{ project.name }}">
                 </div>
                 <div class="project-description">
-                    {{ content|raw }}
+                    <div class="rich-content">{{ content|raw }}</div>
                 </div>
             </div>
-            <div class="project-additional-info">
+            <div class="details-additional-info">
                 {% if project.skills is not empty %}
                     <h2>Compétences</h2>
-                    <ul class="skills-list">
-                        {% for skill in project.skills %}
-                            <li><a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.name }}</a></li>
-                        {% endfor %}
-                    </ul>
+                    <div class="skills-container">
+                        <ul class="skills-list">
+                            {% for skill in project.skills %}
+                                <li><a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 {% endif %}
 
                 {% if project.createdAt %}
