@@ -1,0 +1,41 @@
+{% extends '../../base.html.twig' %}
+
+{% block body %}
+    <main>
+        <section class="admin-dashboard">
+            <h1 class="dashboard-title">Tableau de bord - Administration</h1>
+
+            <a href="{{ path('admin_projects') }}">Projets</a>
+            <a href="{{ path('admin_skills') }}">Compétences</a>
+            <a href="{{ path('admin_experiences') }}">Expériences</a>
+
+
+            <div class="projects-table-container">
+                {% if messages is not empty %}
+                    <table class="projects-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for message in messages %}
+                            <tr>
+                                <td>{{ message.id }}</td>
+                                <td>{{ message.name }}</td>
+                                <td>{{ message.email }}</td>
+                                <td>{{ message.message|length > 50 ? message.message[:50] ~ '...' : message.message }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Aucun message trouvé.</p>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+{% endblock %}

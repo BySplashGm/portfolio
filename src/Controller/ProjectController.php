@@ -18,6 +18,7 @@ class ProjectController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
         $projects = $entityManager->getRepository(Project::class)->findAll();
+
         return $this->render('project/index.html.twig', ['title' => 'Projets', 'projects' => $projects]);
     }
 
@@ -25,9 +26,9 @@ class ProjectController extends AbstractController
      * @throws CommonMarkException
      */
     #[Route('/projects/{id}', name: 'project')]
-    public function show(EntityManagerInterface $entityManager, $id): Response {
+    public function show(EntityManagerInterface $entityManager, $id): Response
+    {
         $project = $entityManager->getRepository(Project::class)->find($id);
-
 
         $converter = new CommonMarkConverter();
         $contentHTML = $converter->convert($project->getDescription());

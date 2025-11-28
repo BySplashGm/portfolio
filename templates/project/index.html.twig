@@ -7,7 +7,7 @@
                 {% for project in projects %}
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="{{ asset(project.imagePath) }}" alt="{{ project.name }}">
+                            <img src="{% if project.imagePath is not null %}{{ asset(project.imagePath) }}{% endif %}" alt="{{ project.name }}">
                         </div>
                         <div class="project-details">
                             <h2>{{ project.name }}</h2>
