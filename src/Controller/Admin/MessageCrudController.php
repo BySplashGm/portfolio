@@ -30,7 +30,8 @@ class MessageCrudController extends AbstractCrudController
         return parent::configureCrud($crud)
             ->setDefaultSort([
                 'createdAt' => 'DESC',
-            ]);
+            ])
+            ->setPageTitle(Crud::PAGE_INDEX, 'Messages');
     }
 
     public function configureFields(string $pageName): iterable

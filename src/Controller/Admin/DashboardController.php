@@ -9,6 +9,7 @@ use App\Entity\Skill;
 use App\Entity\SkillType;
 use App\Entity\User;
 use App\Repository\MessageRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -24,18 +25,38 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class DashboardController extends AbstractDashboardController
 {
     private MessageRepository $messageRepository;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(MessageRepository $messageRepository)
+    public function __construct(MessageRepository $messageRepository, EntityManagerInterface $entityManager)
     {
         $this->messageRepository = $messageRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function index(): Response
     {
-        $messages = $this->messageRepository->findLatest();
+        $latestMessages = $this->messageRepository->findLatest();
+        $projects = $this->entityManager->getRepository(Project::class)->findAll();
+        $experiences = $this->entityManager->getRepository(Experience::class)->findAll();
+        $skills = $this->entityManager->getRepository(Skill::class)->findAll();
+
+        $stats = [
+            [
+                'title' => 'Projects',
+                'amount' => count($projects),
+            ],
+            [
+                'title' => 'Experiences',
+                'amount' => count($experiences),
+            ],
+            [
+                'title' => 'Skills',
+                'amount' => count($skills),
+            ]];
 
         return $this->render('admin/index.html.twig', [
-            'messages' => $messages,
+            'messages' => $latestMessages,
+            'stats' => $stats,
         ]);
     }
 

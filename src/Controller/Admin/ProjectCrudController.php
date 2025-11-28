@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Project;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -27,5 +28,11 @@ class ProjectCrudController extends AbstractCrudController
         yield TextEditorField::new('description')
         ->hideOnIndex();
         yield AssociationField::new('skills');
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return parent::configureCrud($crud)
+            ->setPageTitle(Crud::PAGE_INDEX, 'Projects');
     }
 }

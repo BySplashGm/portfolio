@@ -34,6 +34,7 @@ class SkillCrudController extends AbstractCrudController
         return parent::configureCrud($crud)
             ->setDefaultSort([
                 'type' => 'DESC',
-            ]);
+            ])
+            ->setPageTitle(Crud::PAGE_INDEX, 'Skills');
     }
 }
