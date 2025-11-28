@@ -17,8 +17,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 
 class MessageCrudController extends AbstractCrudController
 {
@@ -31,10 +29,9 @@ class MessageCrudController extends AbstractCrudController
     {
         return parent::configureCrud($crud)
             ->setDefaultSort([
-                'createdAt' => 'DESC'
+                'createdAt' => 'DESC',
             ]);
     }
-
 
     public function configureFields(string $pageName): iterable
     {
@@ -57,9 +54,9 @@ class MessageCrudController extends AbstractCrudController
             ->linkToCrudAction('switchRead')
             ->setLabel(function (Message $message) {
                 if ($message->isRead()) {
-                    return "Mark as Unread";
+                    return 'Mark as Unread';
                 } else {
-                    return "Mark as Read";
+                    return 'Mark as Read';
                 }
             })
             ->displayIf(function (Message $message) {
@@ -75,7 +72,6 @@ class MessageCrudController extends AbstractCrudController
         return parent::configureFilters($filters)
             ->add('read');
     }
-
 
     public function switchRead(AdminContext $adminContext, EntityManagerInterface $entityManager, AdminUrlGenerator $adminUrlGenerator): RedirectResponse
     {
@@ -102,7 +98,4 @@ class MessageCrudController extends AbstractCrudController
 
         return $this->redirect($targetUrl);
     }
-
-
-
 }

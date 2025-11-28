@@ -16,6 +16,7 @@ class SkillController extends AbstractController
     public function index(EntityManagerInterface $entityManager, $id): Response
     {
         $skill = $entityManager->getRepository(Skill::class)->find($id);
+
         return $this->render('skill/show.html.twig', ['skill' => $skill, 'title' => $skill->getName()]);
     }
 }

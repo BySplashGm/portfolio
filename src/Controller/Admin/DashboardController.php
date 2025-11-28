@@ -2,8 +2,12 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Experience;
 use App\Entity\Message;
 use App\Entity\Project;
+use App\Entity\Skill;
+use App\Entity\SkillType;
+use App\Entity\User;
 use App\Repository\MessageRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -38,18 +42,27 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Portfolio')
+            ->setTitle('Portfolio Dashboard')
             ->setFaviconPath('favicon.png');
     }
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::section('Administration');
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Messages', 'fas fa-message', Message::class);
-        yield MenuItem::linkToCrud('Projects', 'fa fa-diagram-project', Project::class);
+        yield MenuItem::linkToCrud('Users', 'fa fa-users', User::class);
 
-        yield MenuItem::section();
+        yield MenuItem::section('Content');
+        yield MenuItem::linkToCrud('Experiences', 'fas fa-briefcase', Experience::class);
+        yield MenuItem::linkToCrud('Projects', 'fa fa-diagram-project', Project::class);
+        yield MenuItem::linkToCrud('Skills', 'fa fa-folder', Skill::class);
+        yield MenuItem::linkToCrud('SkillTypes', 'fa fa-folder-plus', SkillType::class);
+
+        yield MenuItem::section('Public pages');
         yield MenuItem::linkToUrl('Homepage', 'fas fa-home', $this->generateUrl('index'));
+        yield MenuItem::linkToUrl('About', 'fas fa-home', $this->generateUrl('about'));
+        yield MenuItem::linkToUrl('Projects', 'fas fa-home', $this->generateUrl('projects'));
     }
 
     public function configureActions(): Actions
@@ -63,5 +76,4 @@ class DashboardController extends AbstractDashboardController
                 return $action->setIcon('fas fa-list');
             });
     }
-
 }
