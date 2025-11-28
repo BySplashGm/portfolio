@@ -42,11 +42,13 @@ class MainController extends AbstractController
         $message = new Message();
         $name = $request->get('name');
         $email = $request->get('email');
+        $subject = $request->get('subject');
         $messageContent = $request->get('message');
 
         $message = new Message();
         $message->setName($name);
         $message->setEmail($email);
+        $message->setSubject($subject);
         $message->setMessage($messageContent);
 
         $entityManager->persist($message);
