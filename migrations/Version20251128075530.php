@@ -20,12 +20,12 @@ final class Version20251128075530 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE message ADD read BOOLEAN NOT NULL');
+        $this->addSql('ALTER TABLE message ADD is_read BOOLEAN NOT NULL DEFAULT false');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE message DROP read');
+        $this->addSql('ALTER TABLE message DROP is_read');
     }
 }
