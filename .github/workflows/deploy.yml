@@ -28,5 +28,3 @@ jobs:
             php bin/console cache:warmup --env=prod
 
             php bin/console asset-map:compile --env=prod
-
-            chmod -R 775 var
