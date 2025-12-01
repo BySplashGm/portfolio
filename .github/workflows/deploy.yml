@@ -9,14 +9,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Déploiement via SSH
-        uses: appleboy/ssh-action@v0.1.6
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v0.1.8
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SERVER_HOST }}
+          username: deploy
+          key: ${{ secrets.DEPLOY_KEY }}
+          port: 22
           script: |
-            set -e
             cd /var/www/portfolio
             git fetch origin main
             git reset --hard origin/main
@@ -26,5 +29,4 @@ jobs:
             php bin/console cache:clear --env=prod
             php bin/console cache:warmup --env=prod
             php bin/console asset-map:compile --env=prod
-            chown -R deploy:www-data var
             chmod -R 775 var
