@@ -19,8 +19,8 @@ class MessageRepository extends ServiceEntityRepository
     public function findLatest(): array
     {
         return $this->createQueryBuilder('message')
-            ->andWhere('message.read = :read')
-            ->setParameter('read', false)
+            ->andWhere('message.is_read = :is_read')
+            ->setParameter('is_read', false)
             ->orderBy('message.createdAt', 'DESC')
             ->setMaxResults(5)
             ->getQuery()
