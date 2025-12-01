@@ -18,7 +18,7 @@
                             }}" class="text-decoration-none">
                                 <strong>{{ message.name }}</strong>
                                 <span class="text-muted">({{ message.email }})</span>
-                                <span class="text-muted">- {{ message.createdAt|date('Y-m-d H:i') }}</span>
+                                <span class="text-muted">- {{ message.createdAt|date() }}</span>
                             </a>
                             <div>{{ message.subject }}</div>
                         </li>
