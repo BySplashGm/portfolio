@@ -41,7 +41,7 @@ class MessageCrudController extends AbstractCrudController
         yield TextField::new('subject');
         yield TextField::new('name');
         yield TextField::new('email');
-        yield BooleanField::new('read');
+        yield BooleanField::new('isRead');
         yield TextareaField::new('message')
             ->hideOnIndex();
         yield DateTimeField::new('createdAt');
@@ -71,7 +71,7 @@ class MessageCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return parent::configureFilters($filters)
-            ->add('read');
+            ->add('isRead');
     }
 
     public function switchRead(AdminContext $adminContext, EntityManagerInterface $entityManager, AdminUrlGenerator $adminUrlGenerator): RedirectResponse
