@@ -6,6 +6,9 @@
 parameters:
 
 services:
+    App\DataFixtures\:
+        resource: '../../src/DataFixtures'
+        tags: [ 'doctrine.fixture.orm' ]
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
