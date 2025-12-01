@@ -28,25 +28,29 @@ class MainController extends AbstractController
         $experiences = $entityManager->getRepository(Experience::class)->findAll();
         $skills = $entityManager->getRepository(Skill::class)->findAll();
         $skillTypes = $entityManager->getRepository(SkillType::class)->findAll();
+
         return $this->render('main/about.html.twig', ['title' => 'À propos', 'skills' => $skills, 'skillTypes' => $skillTypes, 'experiences' => $experiences]);
     }
 
     #[Route('/contact', name: 'contact')]
-    public function contact(): Response {
+    public function contact(): Response
+    {
         return $this->render('main/contact.html.twig', ['title' => 'Contact']);
     }
 
     #[Route('/contact/submit', name: 'contact_submit', methods: ['POST'])]
-    public function submitContact(EntityManagerInterface $entityManager, Request $request) : Response
+    public function submitContact(EntityManagerInterface $entityManager, Request $request): Response
     {
         $message = new Message();
         $name = $request->get('name');
         $email = $request->get('email');
+        $subject = $request->get('subject');
         $messageContent = $request->get('message');
 
         $message = new Message();
         $message->setName($name);
         $message->setEmail($email);
+        $message->setSubject($subject);
         $message->setMessage($messageContent);
 
         $entityManager->persist($message);
@@ -54,6 +58,7 @@ class MainController extends AbstractController
 
         $this->addFlash('success', 'Votre message a été envoyé avec succès.');
         sleep(1);
+
         return $this->redirectToRoute('index');
     }
 }

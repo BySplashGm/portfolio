@@ -1,41 +1,45 @@
-{% extends 'base.html.twig' %}
+{% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block body %}
-    <main>
-        <section class="admin-dashboard">
-            <h1 class="dashboard-title">Tableau de bord - Administration</h1>
+{% block page_title %}
+    Admin Dashboard
+{% endblock %}
 
-            <a href="{{ path('admin_projects') }}">Projets</a>
-            <a href="{{ path('admin_skills') }}">Compétences</a>
-            <a href="{{ path('admin_experiences') }}">Expériences</a>
+{% block main %}
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="mb-3">Latest Messages</h3>
 
+            {% if messages is empty %}
+                <p class="text-muted">No new message</p>
+            {% else %}
+                <ol class="ps-3">
+                    {% for message in messages %}
+                        <li class="mb-2">
+                            <a href="{{ ea_url()
+                                .setController('App\\Controller\\Admin\\MessageCrudController')
+                                .setAction('detail')
+                                .setEntityId(message.id)
+                            }}" class="text-decoration-none">
+                                <strong>{{ message.name }}</strong>
+                                <span class="text-muted">({{ message.email }})</span>
+                                <span class="text-muted">- {{ message.createdAt|date() }}</span>
+                            </a>
+                            <div>{{ message.subject }}</div>
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+        </div>
 
-            <div class="projects-table-container">
-                {% if messages is not empty %}
-                    <table class="projects-table">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nom</th>
-                            <th>Email</th>
-                            <th>Message</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for message in messages %}
-                            <tr>
-                                <td>{{ message.id }}</td>
-                                <td>{{ message.name }}</td>
-                                <td>{{ message.email }}</td>
-                                <td>{{ message.message|length > 50 ? message.message[:50] ~ '...' : message.message }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                {% else %}
-                    <p>Aucun message trouvé.</p>
-                {% endif %}
-            </div>
-        </section>
-    </main>
+        <div class="col-md-6">
+            <h3 class="mb-3">Stats</h3>
+
+            {% for stat in stats %}
+                <div class="mb-2">
+                    <span class="fw-bold">{{ stat.amount }}</span>
+                    <span class="text-muted">{{ stat.title }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

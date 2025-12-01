@@ -26,9 +26,16 @@ class Message
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\Column]
+    private ?bool $read = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $subject = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->read = false;
     }
 
     public function getId(): ?int
@@ -80,6 +87,30 @@ class Message
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isRead(): ?bool
+    {
+        return $this->read;
+    }
+
+    public function setRead(bool $read): static
+    {
+        $this->read = $read;
+
+        return $this;
+    }
+
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(string $subject): static
+    {
+        $this->subject = $subject;
 
         return $this;
     }
