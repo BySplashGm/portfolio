@@ -31,7 +31,7 @@ class AppFixtures extends Fixture
             $message->setSubject($faker->sentence());
             $message->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 years')));
             $message->setMessage($faker->paragraphs(3, true));
-            $message->setRead($faker->boolean(70));
+            $message->setIsRead($faker->boolean(70));
             $manager->persist($message);
         }
 

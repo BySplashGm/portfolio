@@ -88,7 +88,7 @@ class MessageCrudController extends AbstractCrudController
             throw new \RuntimeException('Message introuvable.');
         }
 
-        $message->setRead(!$message->isRead());
+        $message->setIsRead(!$message->isRead());
         $entityManager->flush();
 
         $targetUrl = $adminUrlGenerator
