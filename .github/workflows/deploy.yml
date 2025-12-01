@@ -1,3 +1,5 @@
+name: Deploy Symfony
+
 on:
   push:
     branches: [ main ]
@@ -20,11 +22,28 @@ jobs:
             set -e
             cd /var/www/portfolio
 
+            # sync repo
             git fetch origin main
             git reset --hard origin/main
 
+            # ensure uploads dir exists (in case of first deploy)
+            mkdir -p /var/www/portfolio_uploads/images || true
+
+            # ensure public/images is a symlink to the persistent storage
+            if [ ! -L public/images ]; then
+              rm -rf public/images || true
+              ln -s /var/www/portfolio_uploads/images public/images
+            fi
+
+            # install dependencies (no scripts to avoid post-install surprises)
             composer install --no-dev --optimize-autoloader --no-scripts
+
+            # clear/warm cache as deploy user (deploy must be able to write var/)
             php bin/console cache:clear --env=prod --no-warmup
             php bin/console cache:warmup --env=prod
 
+            # compile assets
             php bin/console asset-map:compile --env=prod
+
+            # ensure perms are group-writable (no chown to avoid sudo)
+            chmod -R g+rwX var public/assets || true
