@@ -19,7 +19,7 @@ class ProjectController extends AbstractController
     {
         $projects = $entityManager->getRepository(Project::class)->findAll();
 
-        return $this->render('project/index.html.twig', ['title' => 'Projets', 'projects' => $projects]);
+        return $this->render('project/index.html.twig', ['projects' => $projects]);
     }
 
     /**
@@ -33,6 +33,6 @@ class ProjectController extends AbstractController
         $converter = new CommonMarkConverter();
         $contentHTML = $converter->convert($project->getDescription());
 
-        return $this->render('project/show.html.twig', ['title' => $project->getName(), 'project' => $project, 'content' => $contentHTML]);
+        return $this->render('project/show.html.twig', ['project' => $project, 'content' => $contentHTML]);
     }
 }

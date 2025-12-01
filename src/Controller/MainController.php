@@ -19,7 +19,7 @@ class MainController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(): Response
     {
-        return $this->render('main/index.html.twig', ['title' => 'Accueil']);
+        return $this->render('main/index.html.twig');
     }
 
     #[Route('/about', name: 'about')]
@@ -29,13 +29,13 @@ class MainController extends AbstractController
         $skills = $entityManager->getRepository(Skill::class)->findAll();
         $skillTypes = $entityManager->getRepository(SkillType::class)->findAll();
 
-        return $this->render('main/about.html.twig', ['title' => 'À propos', 'skills' => $skills, 'skillTypes' => $skillTypes, 'experiences' => $experiences]);
+        return $this->render('main/about.html.twig', ['skills' => $skills, 'skillTypes' => $skillTypes, 'experiences' => $experiences]);
     }
 
     #[Route('/contact', name: 'contact')]
     public function contact(): Response
     {
-        return $this->render('main/contact.html.twig', ['title' => 'Contact']);
+        return $this->render('main/contact.html.twig');
     }
 
     #[Route('/contact/submit', name: 'contact_submit', methods: ['POST'])]
