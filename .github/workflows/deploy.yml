@@ -26,24 +26,23 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
-            # ensure uploads dir exists (in case of first deploy)
+            # persistent uploads (symlink)
             mkdir -p /var/www/portfolio_uploads/images || true
-
-            # ensure public/images is a symlink to the persistent storage
             if [ ! -L public/images ]; then
               rm -rf public/images || true
               ln -s /var/www/portfolio_uploads/images public/images
             fi
 
-            # install dependencies (no scripts to avoid post-install surprises)
+            # install PHP deps
             composer install --no-dev --optimize-autoloader --no-scripts
 
-            # clear/warm cache as deploy user (deploy must be able to write var/)
+            # clear/warm cache
             php bin/console cache:clear --env=prod --no-warmup
             php bin/console cache:warmup --env=prod
 
             # compile assets
             php bin/console asset-map:compile --env=prod
 
-            # ensure perms are group-writable (no chown to avoid sudo)
-            chmod -R g+rwX var public/assets || true
+            # ensure ACL (critical to avoid permission errors)
+            setfacl -R -m u:www-data:rwX var public/assets public/images
+            setfacl -dR -m u:www-data:rwX var public/assets public/images
