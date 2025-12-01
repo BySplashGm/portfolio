@@ -1,0 +1,42 @@
+name: Deploy Symfony 7.4 to VPS
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.8.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Deploy to VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} "
+            cd /var/www/portfolio &&
+
+            git reset --hard
+            git checkout main
+            git pull origin main
+
+            composer install --no-dev --optimize-autoloader
+
+            php bin/console cache:clear --env=prod
+            php bin/console cache:warmup --env=prod
+
+            php bin/console asset-map:compile --env=prod
+
+            chown -R www-data:www-data /var/www/portfolio
+            find var -type d -exec chmod 775 {} \;
+            find var -type f -exec chmod 664 {} \;
+
+            # Reload Apache
+            sudo systemctl reload apache2
+          "
