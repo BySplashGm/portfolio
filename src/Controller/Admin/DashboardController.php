@@ -97,4 +97,13 @@ class DashboardController extends AbstractDashboardController
                 return $action->setIcon('fas fa-list');
             });
     }
+
+    public function configureCrud(): Crud
+    {
+        return parent::configureCrud()
+            ->setDefaultSort(['id' => 'DESC'])
+            ->setPaginatorPageSize(15);
+    }
+
+
 }
