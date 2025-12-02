@@ -25,6 +25,6 @@ class ExperienceController extends AbstractController
         $converter = new CommonMarkConverter();
         $contentHTML = $converter->convert($experience->getDescription());
 
-        return $this->render('experience/index.html.twig', ['title' => $experience->getLabel(), 'experience' => $experience, 'content' => $contentHTML]);
+        return $this->render('experience/index.html.twig', ['experience' => $experience, 'content' => $contentHTML]);
     }
 }
