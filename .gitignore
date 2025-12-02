@@ -31,5 +31,7 @@
 /.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###
 
+/public/*
+
 /public/images/*
 !/public/images/.gitkeep
