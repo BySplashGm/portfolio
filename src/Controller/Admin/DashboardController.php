@@ -104,6 +104,4 @@ class DashboardController extends AbstractDashboardController
             ->setDefaultSort(['id' => 'DESC'])
             ->setPaginatorPageSize(15);
     }
-
-
 }

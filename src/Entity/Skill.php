@@ -9,7 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SkillRepository::class)]
-class Skill
+class Skill implements \Stringable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
