@@ -42,6 +42,15 @@ class ContactFormType extends AbstractType
                     new NotBlank(),
                     new Length(min: 10),
                 ],
+            ])
+            ->add('website', TextType::class, [
+                'required' => false,
+                'mapped' => false,
+                'label' => false,
+                'attr' => [
+                    'autocomplete' => 'off',
+                    'tabindex' => '-1',
+                ],
             ]);
     }
 
