@@ -31,6 +31,9 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-scripts
 
+      - name: Install JS vendor assets
+        run: php bin/console importmap:install
+
       - name: Security audit
         run: composer audit
 
