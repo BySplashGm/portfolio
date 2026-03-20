@@ -32,16 +32,18 @@ body {
 
 /* ── Shared heading ── */
 .section-title {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--color-title);
     margin-bottom: 1.25rem;
     text-align: left;
+    padding-left: 0.75rem;
+    border-left: 3px solid var(--color-accent);
 }
 
 @media (min-width: 768px) {
     .section-title {
-        font-size: 2rem;
+        font-size: 1.75rem;
         margin-bottom: 1.5rem;
     }
 }

@@ -20,11 +20,11 @@
     /* Typography */
     --font-base: 'Inter', sans-serif;
 
-    /* Spacing */
-    --radius-sm: 5px;
+    /* Border radius — one standard level keeps everything consistent */
+    --radius-sm: 6px;
     --radius-md: 8px;
-    --radius-lg: 10px;
-    --radius-xl: 1rem;
+    --radius-lg: 8px;
+    --radius-xl: 8px;
 
     /* Shadows */
     --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.15);
