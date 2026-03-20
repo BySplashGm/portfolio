@@ -6,9 +6,8 @@ namespace App\Controller;
 
 use App\Entity\Experience;
 use App\Entity\Message;
-use App\Entity\Skill;
-use App\Entity\SkillType;
 use App\Form\ContactFormType;
+use App\Repository\SkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,13 +23,16 @@ class MainController extends AbstractController
     }
 
     #[Route('/about', name: 'about')]
-    public function about(EntityManagerInterface $entityManager): Response
+    public function about(EntityManagerInterface $entityManager, SkillRepository $skillRepository): Response
     {
         $experiences = $entityManager->getRepository(Experience::class)->findAll();
-        $skills = $entityManager->getRepository(Skill::class)->findAll();
-        $skillTypes = $entityManager->getRepository(SkillType::class)->findAll();
 
-        return $this->render('main/about.html.twig', ['skills' => $skills, 'skillTypes' => $skillTypes, 'experiences' => $experiences]);
+        $skillsByType = [];
+        foreach ($skillRepository->findAllWithType() as $skill) {
+            $skillsByType[$skill->getType()->getLabel()][] = $skill;
+        }
+
+        return $this->render('main/about.html.twig', ['skillsByType' => $skillsByType, 'experiences' => $experiences]);
     }
 
     #[Route('/contact', name: 'contact')]

@@ -65,21 +65,19 @@
         <section class="skills-section">
             <h2 class="section-title">Compétences</h2>
             <div class="skills-container">
-                {% for skillType in skillTypes %}
+                {% for typeLabel, skills in skillsByType %}
                     <div class="skill-type">
-                        <h3 class="skill-type-title">{{ skillType.label }}</h3>
+                        <h3 class="skill-type-title">{{ typeLabel }}</h3>
                         <ul class="skills-list">
                             {% for skill in skills %}
-                                {% if skill.type.id == skillType.id %}
-                                    <li>
-                                        <a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.name }}</a>
-                                    </li>
-                                {% endif %}
+                                <li>
+                                    <a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.name }}</a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>
-                    {% else %}
-                        <p>Aucune compétence à afficher pour le moment.</p>
+                {% else %}
+                    <p>Aucune compétence à afficher pour le moment.</p>
                 {% endfor %}
             </div>
         </section>

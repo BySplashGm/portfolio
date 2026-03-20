@@ -16,28 +16,30 @@ class SkillRepository extends ServiceEntityRepository
         parent::__construct($registry, Skill::class);
     }
 
-    //    /**
-    //     * @return Skill[] Returns an array of Skill objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('s.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * @return Skill[] with type eagerly loaded
+     */
+    public function findAllWithType(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->leftJoin('s.type', 't')
+            ->addSelect('t')
+            ->orderBy('t.label', 'ASC')
+            ->addOrderBy('s.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
-    //    public function findOneBySomeField($value): ?Skill
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findWithProjectsAndExperiences(int $id): ?object
+    {
+        return $this->createQueryBuilder('s')
+            ->leftJoin('s.projects', 'p')
+            ->addSelect('p')
+            ->leftJoin('s.experiences', 'e')
+            ->addSelect('e')
+            ->where('s.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

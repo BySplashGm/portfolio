@@ -36,23 +36,16 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         $latestMessages = $this->messageRepository->findLatest();
-        $projects = $this->entityManager->getRepository(Project::class)->findAll();
-        $experiences = $this->entityManager->getRepository(Experience::class)->findAll();
-        $skills = $this->entityManager->getRepository(Skill::class)->findAll();
+
+        $count = fn(string $entity): int => (int) $this->entityManager
+            ->createQuery("SELECT COUNT(e.id) FROM {$entity} e")
+            ->getSingleScalarResult();
 
         $stats = [
-            [
-                'title' => 'Projects',
-                'amount' => count($projects),
-            ],
-            [
-                'title' => 'Experiences',
-                'amount' => count($experiences),
-            ],
-            [
-                'title' => 'Skills',
-                'amount' => count($skills),
-            ]];
+            ['title' => 'Projects', 'amount' => $count(Project::class)],
+            ['title' => 'Experiences', 'amount' => $count(Experience::class)],
+            ['title' => 'Skills', 'amount' => $count(Skill::class)],
+        ];
 
         return $this->render('admin/index.html.twig', [
             'messages' => $latestMessages,
