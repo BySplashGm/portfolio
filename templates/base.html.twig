@@ -41,7 +41,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5/dist/fancybox/fancybox.umd.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    function initFancybox() {
         document.querySelectorAll('.rich-content img').forEach(function (img) {
             if (img.parentElement.tagName !== 'A') {
                 var a = document.createElement('a');
@@ -52,7 +52,10 @@
             }
         });
         Fancybox.bind('[data-fancybox]');
-    });
+    }
+
+    document.addEventListener('DOMContentLoaded', initFancybox);
+    document.addEventListener('turbo:load', initFancybox);
 </script>
 <footer>
     <div class="logo-footer">
