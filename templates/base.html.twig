@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5/dist/fancybox/fancybox.css"/>
     {% block stylesheets %}
     {% endblock %}
 
@@ -37,6 +38,22 @@
 </header>
 
 {% block body %}{% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5/dist/fancybox/fancybox.umd.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.rich-content img').forEach(function (img) {
+            if (img.parentElement.tagName !== 'A') {
+                var a = document.createElement('a');
+                a.href = img.src;
+                a.dataset.fancybox = 'gallery';
+                img.parentNode.insertBefore(a, img);
+                a.appendChild(img);
+            }
+        });
+        Fancybox.bind('[data-fancybox]');
+    });
+</script>
 <footer>
     <div class="logo-footer">
         <span>{{ site_name | default('Maxime\'s Portfolio') }}</span>

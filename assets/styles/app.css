@@ -25,7 +25,9 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    margin: 2em 10em;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
     display: flex;
     flex-direction: column;
 }
@@ -36,6 +38,17 @@ body {
 
 .experience-link:hover {
     color: var(--link-hover-color);
+}
+
+/* Flash messages */
+.flash-success {
+    background-color: #1a3d1a;
+    color: #7ede7e;
+    border: 1px solid #4caf50;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0 1rem;
+    font-size: 1rem;
 }
 
 /* Section Hero */
@@ -335,7 +348,8 @@ nav a:hover {
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    flex: 1 0 30%;
+    flex: 1 1 280px;
+    max-width: 100%;
 }
 
 .project-card:hover {
@@ -464,6 +478,12 @@ nav a:hover {
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0,0,0,0.4);
     object-fit: contain;
+    cursor: zoom-in;
+    transition: opacity 0.2s ease;
+}
+
+.rich-content img:hover {
+    opacity: 0.85;
 }
 
 .rich-content img:not(.full-width) {
@@ -504,15 +524,7 @@ nav a:hover {
     padding: 1em;
 }
 
-/* Pages projets */
-.project-description {
-    composes: rich-content;
-}
-
-/* Pages expériences */
-.experience-description {
-    composes: rich-content;
-}
+/* Pages projets / expériences — alias of rich-content, no extra styles needed */
 
 .details-section {
     max-width: 1200px;
@@ -534,10 +546,6 @@ nav a:hover {
     flex-direction: column;
     gap: 2rem;
     margin-bottom: 2rem;
-}
-
-.project-description, .experience-description {
-    composes: rich-content;
 }
 
 .project-image img {
@@ -639,10 +647,6 @@ nav a:hover {
     }
 }
 
-.project-image img {
-    width: 100%;
-}
-
 .project-description p {
     font-size: 1.2rem;
     color: var(--text-color);
@@ -700,7 +704,6 @@ nav a:hover {
 .back-to-projects:hover {
     color: var(--link-hover-color);
 }
-
 
 /* Footer retravaillé légèrement avec des ajouts subtils */
 footer {
@@ -1049,9 +1052,8 @@ footer .footer-bottom p {
 /* Responsive Design */
 @media screen and (max-width: 1024px) {
     body {
-        margin: 2em 5em;
+        padding: 0 1.5rem;
     }
-
 
     .logo {
         font-size: 1.7rem;
@@ -1081,7 +1083,7 @@ footer .footer-bottom p {
 /* Responsive Design : Max-width 768px */
 @media screen and (max-width: 768px) {
     body {
-        margin: 1em 3em;
+        padding: 0 1rem;
     }
 
     header {
@@ -1225,7 +1227,7 @@ footer .footer-bottom p {
 /* Responsive Design : Max-width 480px */
 @media screen and (max-width: 480px) {
     body {
-        margin: 1em 2em;
+        padding: 0 0.75rem;
     }
 
     .logo {
