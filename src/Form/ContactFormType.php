@@ -22,7 +22,7 @@ class ContactFormType extends AbstractType
             ->add('name', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['min' => 2, 'max' => 255]),
+                    new Length(min: 2, max: 255),
                 ],
             ])
             ->add('email', EmailType::class, [
@@ -34,13 +34,13 @@ class ContactFormType extends AbstractType
             ->add('subject', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['min' => 2, 'max' => 100]),
+                    new Length(min: 2, max: 100),
                 ],
             ])
             ->add('message', TextareaType::class, [
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['min' => 10]),
+                    new Length(min: 10),
                 ],
             ]);
     }
