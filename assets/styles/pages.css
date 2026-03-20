@@ -134,6 +134,12 @@
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
     border-left: 3px solid var(--color-accent);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.formation-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
 }
 
 .formation-card h3 {
@@ -177,6 +183,12 @@
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
     border-left: 3px solid var(--color-accent);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.experience-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
 }
 
 .experience-card h3 {
@@ -414,6 +426,12 @@
     background-color: var(--color-surface);
     box-shadow: var(--shadow-sm);
     flex: 1 1 220px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.related-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
 }
 
 .related-item h3 {
@@ -486,7 +504,7 @@
 
 .login-section h1 {
     font-size: 1.5rem;
-    color: var(--color-title);
+    color: var(--color-accent);
     margin-bottom: 1.25rem;
     text-align: center;
 }
@@ -513,8 +531,9 @@
     width: 100%;
     margin-top: 1.5rem;
     padding: 0.75rem;
-    background-color: var(--color-primary);
-    color: #fff;
+    background-color: var(--color-accent);
+    color: #333;
+    font-weight: 600;
     border: none;
     border-radius: 30px;
     font-size: 1rem;
@@ -523,7 +542,7 @@
 }
 
 .btn-submit:hover {
-    background-color: var(--color-secondary);
+    background-color: var(--color-accent-hover);
     transform: scale(1.02);
 }
 

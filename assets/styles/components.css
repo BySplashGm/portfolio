@@ -4,6 +4,7 @@
 .experience-link {
     color: var(--color-link);
     text-decoration: none;
+    transition: color 0.2s;
 }
 
 .experience-link:hover {
@@ -40,12 +41,13 @@
     color: var(--color-link);
     text-decoration: none;
     font-size: 1rem;
-    transition: color 0.3s;
+    transition: color 0.2s, transform 0.2s;
 }
 
 .back-to-projects:hover,
 .back-link:hover {
     color: var(--color-link-hover);
+    transform: translateX(-4px);
 }
 
 /* ════════════════════════════════
@@ -68,13 +70,18 @@
     transition: transform 0.2s;
 }
 
+.skills-list li:hover {
+    transform: translateX(3px);
+}
+
 .skills-list li a {
     color: var(--color-text);
     text-decoration: none;
+    transition: color 0.2s;
 }
 
 .skills-list li a:hover {
-    color: var(--color-link-hover);
+    color: var(--color-accent);
 }
 
 /* ════════════════════════════════
@@ -219,11 +226,20 @@
 /* ════════════════════════════════
    Project card thumbnail image
    ════════════════════════════════ */
+.project-image {
+    overflow: hidden;
+}
+
 .project-image img {
     width: 100%;
     height: 180px;
     object-fit: cover;
     display: block;
+    transition: transform 0.35s;
+}
+
+.project-image img:hover {
+    transform: scale(1.06);
 }
 
 @media (min-width: 768px) {
@@ -251,11 +267,17 @@
     width: 100%;
     padding: 0.75rem;
     border-radius: var(--radius-md);
-    border: 1px solid var(--color-bg-2);
+    border: 1px solid var(--color-surface-2);
     background-color: var(--color-bg-2);
     color: var(--color-text);
     font-size: 1rem;
-    transition: outline 0.15s;
+    transition: border-color 0.2s, outline 0.15s;
+}
+
+.form-input:hover,
+.form-textarea:hover,
+.form-control:hover {
+    border-color: var(--color-accent);
 }
 
 .form-input:focus,
@@ -271,8 +293,9 @@
 .btn-primary {
     display: inline-block;
     padding: 0.75rem 2rem;
-    background-color: var(--color-primary);
-    color: #fff;
+    background-color: var(--color-accent);
+    color: #333;
+    font-weight: 600;
     border: none;
     border-radius: 30px;
     font-size: 1rem;
@@ -282,6 +305,6 @@
 
 .submit-button:hover,
 .btn-primary:hover {
-    background-color: var(--color-secondary);
+    background-color: var(--color-accent-hover);
     transform: scale(1.05);
 }
