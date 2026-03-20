@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Project;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ProjectRepository;
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Exception\CommonMarkException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,9 +14,9 @@ use Symfony\Component\Routing\Attribute\Route;
 class ProjectController extends AbstractController
 {
     #[Route('/projects', name: 'projects')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(ProjectRepository $projectRepository): Response
     {
-        $projects = $entityManager->getRepository(Project::class)->findAll();
+        $projects = $projectRepository->findAll();
 
         return $this->render('project/index.html.twig', ['projects' => $projects]);
     }
@@ -26,15 +25,14 @@ class ProjectController extends AbstractController
      * @throws CommonMarkException
      */
     #[Route('/projects/{id}', name: 'project')]
-    public function show(EntityManagerInterface $entityManager, int $id): Response
+    public function show(ProjectRepository $projectRepository, CommonMarkConverter $converter, int $id): Response
     {
-        $project = $entityManager->getRepository(Project::class)->find($id);
+        $project = $projectRepository->find($id);
 
         if (!$project) {
             throw $this->createNotFoundException('Project not found');
         }
 
-        $converter = new CommonMarkConverter();
         $contentHTML = $converter->convert($project->getDescription());
 
         return $this->render('project/show.html.twig', ['project' => $project, 'content' => $contentHTML]);

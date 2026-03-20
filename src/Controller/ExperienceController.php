@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Experience;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ExperienceRepository;
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Exception\CommonMarkException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,15 +17,14 @@ class ExperienceController extends AbstractController
      * @throws CommonMarkException
      */
     #[Route('/experience/{id}', name: 'experience_show')]
-    public function index(EntityManagerInterface $entityManager, int $id): Response
+    public function show(ExperienceRepository $experienceRepository, CommonMarkConverter $converter, int $id): Response
     {
-        $experience = $entityManager->getRepository(Experience::class)->find($id);
+        $experience = $experienceRepository->find($id);
 
         if (!$experience) {
             throw $this->createNotFoundException('Experience not found');
         }
 
-        $converter = new CommonMarkConverter();
         $contentHTML = $converter->convert($experience->getDescription());
 
         return $this->render('experience/index.html.twig', ['experience' => $experience, 'content' => $contentHTML]);
