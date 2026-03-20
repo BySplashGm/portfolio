@@ -43,8 +43,10 @@ class MainController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($message);
-            $entityManager->flush();
+            if (!$form->get('website')->getData()) {
+                $entityManager->persist($message);
+                $entityManager->flush();
+            }
 
             $this->addFlash('success', 'Votre message a été envoyé avec succès.');
 
