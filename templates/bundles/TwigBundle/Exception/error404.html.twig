@@ -3,9 +3,11 @@
 {% block title %}Erreur 404{% endblock %}
 
 {% block body %}
-    <h1>Page inconnue</h1>
-    <p>
-        La page recherchée n'a pas été trouvée.
-        <a href="{{ path('index') }}">Retour à l'accueil</a>.
-    </p>
+    <main>
+        <div class="error-section">
+            <h1>404</h1>
+            <p>La page recherchée n'a pas été trouvée.</p>
+            <a href="{{ path('index') }}">Retour à l'accueil</a>
+        </div>
+    </main>
 {% endblock %}

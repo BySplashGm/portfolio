@@ -4,13 +4,11 @@
 
 {% block body %}
     <main>
-        <div class="contact-container">
-            <div class="contact-form">
-                <h1>Contactez-moi</h1>
-                <p>Si vous avez des questions ou des demandes, n'hésitez pas à me contacter via le formulaire ci-dessous.</p>
+        <div class="contact-section">
+            <h1>Contactez-moi</h1>
+            <p>Si vous avez des questions ou des demandes, n'hésitez pas à me contacter via le formulaire ci-dessous.</p>
 
-                <!-- Formulaire de contact -->
-                {{ form_start(form, {action: path('contact'), method: 'post', attr: {class: 'contact-form-content'}}) }}
+            {{ form_start(form, {action: path('contact'), method: 'post'}) }}
                     <div class="form-group">
                         {{ form_label(form.name, 'Nom :') }}
                         {{ form_widget(form.name, {attr: {placeholder: 'Votre nom', class: 'form-input'}}) }}
@@ -32,8 +30,7 @@
                         {{ form_errors(form.message) }}
                     </div>
                     <button type="submit" class="submit-button">Envoyer</button>
-                {{ form_end(form) }}
-            </div>
+            {{ form_end(form) }}
         </div>
     </main>
 {% endblock %}
