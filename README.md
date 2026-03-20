@@ -1,5 +1,7 @@
 # 🚀 Maxime's Portfolio
 
+![CI](https://github.com/BySplashGm/portfolio/actions/workflows/ci.yml/badge.svg)
+
 Welcome to my personal **portfolio**, built with **Symfony 7** and designed to present my background, skills, and projects in a modern and dynamic way.
 
 ## 🌐 Live Demo
@@ -8,10 +10,10 @@ Welcome to my personal **portfolio**, built with **Symfony 7** and designed to p
 
 ## 🧰 Tech Stack
 
-- **Backend**: Symfony 7.4 (PHP >= 8.2)
-- **Frontend**: Twig, HTML5, CSS
+- **Backend**: Symfony 7.4 (PHP >= 8.2), EasyAdmin 4
+- **Frontend**: Twig, HTML5, CSS, Hotwire Turbo & Stimulus (via AssetMapper — no Node/npm)
 - **Database**: MariaDB
-- **Tools**: Composer
+- **Tools**: Composer, php-cs-fixer
 
 ## 📁 Features
 
@@ -28,23 +30,24 @@ To run this project locally:
 git clone https://github.com/BySplashGm/portfolio.git
 cd portfolio
 composer install
+php bin/console importmap:install
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
-php bin/console doctrine:fixtures:load
+php bin/console doctrine:fixtures:load   # test admin: admin@test.com / adminpass
 symfony server:start -d
 ```
 
-### 🔐 Example dev .env.local configuration (without credentials) (you can also just use docker compose)
+### 🔐 Example `.env.local`
 
 ```env
-APP_ENV=dev
-APP_DEBUG=1
-DB_ADDR_IP=127.0.0.1
-DB_PORT=3306
-DB_NAME=DATABASE_NAME
-DB_USER=DATABASE_USER
-DB_USER_PWD=DATABASE_USER_PASSWORD
-DATABASE_URL="mysql://${DB_USER}:${DB_USER_PWD}@${DB_ADDR_IP}:${DB_PORT}/${DB_NAME}?serverVersion=8.0.32&charset=utf8mb4"
+APP_SECRET=your_secret_here
+DATABASE_URL="mysql://user:password@127.0.0.1:3306/portfolio?serverVersion=10.11.6-MariaDB&charset=utf8mb4"
+```
+
+### 🧪 Running tests
+
+```bash
+php bin/phpunit
 ```
 
 ## 🤝 Contributing
