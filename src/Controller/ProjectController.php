@@ -26,9 +26,13 @@ class ProjectController extends AbstractController
      * @throws CommonMarkException
      */
     #[Route('/projects/{id}', name: 'project')]
-    public function show(EntityManagerInterface $entityManager, $id): Response
+    public function show(EntityManagerInterface $entityManager, int $id): Response
     {
         $project = $entityManager->getRepository(Project::class)->find($id);
+
+        if (!$project) {
+            throw $this->createNotFoundException('Project not found');
+        }
 
         $converter = new CommonMarkConverter();
         $contentHTML = $converter->convert($project->getDescription());

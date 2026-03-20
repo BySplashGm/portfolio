@@ -18,9 +18,13 @@ class ExperienceController extends AbstractController
      * @throws CommonMarkException
      */
     #[Route('/experience/{id}', name: 'experience_show')]
-    public function index(EntityManagerInterface $entityManager, $id): Response
+    public function index(EntityManagerInterface $entityManager, int $id): Response
     {
         $experience = $entityManager->getRepository(Experience::class)->find($id);
+
+        if (!$experience) {
+            throw $this->createNotFoundException('Experience not found');
+        }
 
         $converter = new CommonMarkConverter();
         $contentHTML = $converter->convert($experience->getDescription());

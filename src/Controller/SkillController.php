@@ -13,9 +13,13 @@ use Symfony\Component\Routing\Attribute\Route;
 class SkillController extends AbstractController
 {
     #[Route('/skill/{id}', name: 'skill_show')]
-    public function index(EntityManagerInterface $entityManager, $id): Response
+    public function index(EntityManagerInterface $entityManager, int $id): Response
     {
         $skill = $entityManager->getRepository(Skill::class)->find($id);
+
+        if (!$skill) {
+            throw $this->createNotFoundException('Skill not found');
+        }
 
         return $this->render('skill/show.html.twig', ['skill' => $skill]);
     }
