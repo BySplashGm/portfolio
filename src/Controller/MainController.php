@@ -8,6 +8,7 @@ use App\Entity\Experience;
 use App\Entity\Message;
 use App\Entity\Skill;
 use App\Entity\SkillType;
+use App\Form\ContactFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,32 +34,21 @@ class MainController extends AbstractController
     }
 
     #[Route('/contact', name: 'contact')]
-    public function contact(): Response
-    {
-        return $this->render('main/contact.html.twig');
-    }
-
-    #[Route('/contact/submit', name: 'contact_submit', methods: ['POST'])]
-    public function submitContact(EntityManagerInterface $entityManager, Request $request): Response
+    public function contact(Request $request, EntityManagerInterface $entityManager): Response
     {
         $message = new Message();
-        $name = $request->get('name');
-        $email = $request->get('email');
-        $subject = $request->get('subject');
-        $messageContent = $request->get('message');
+        $form = $this->createForm(ContactFormType::class, $message);
+        $form->handleRequest($request);
 
-        $message = new Message();
-        $message->setName($name);
-        $message->setEmail($email);
-        $message->setSubject($subject);
-        $message->setMessage($messageContent);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($message);
+            $entityManager->flush();
 
-        $entityManager->persist($message);
-        $entityManager->flush();
+            $this->addFlash('success', 'Votre message a été envoyé avec succès.');
 
-        $this->addFlash('success', 'Votre message a été envoyé avec succès.');
-        sleep(1);
+            return $this->redirectToRoute('index');
+        }
 
-        return $this->redirectToRoute('index');
+        return $this->render('main/contact.html.twig', ['form' => $form]);
     }
 }
