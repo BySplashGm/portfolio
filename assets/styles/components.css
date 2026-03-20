@@ -3,7 +3,8 @@
    ════════════════════════════════ */
 .experience-link {
     color: var(--color-link);
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 2px;
     transition: color 0.2s;
 }
 
@@ -57,21 +58,21 @@
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem;
-    padding: 0.625rem;
-    background-color: var(--color-surface);
-    border-radius: var(--radius-sm);
-    font-size: 1rem;
-    color: var(--color-text);
+    gap: 0.5rem;
+    padding: 0;
+    font-size: 0.95rem;
 }
 
 .skills-list li {
-    padding: 0.5rem;
-    transition: transform 0.2s;
+    padding: 0.35rem 0.75rem;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-sm);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .skills-list li:hover {
     transform: translateX(3px);
+    box-shadow: var(--shadow-sm);
 }
 
 .skills-list li a {
@@ -280,11 +281,11 @@
     border-color: var(--color-accent);
 }
 
-.form-input:focus,
-.form-textarea:focus,
-.form-control:focus {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 1px;
+.form-input:focus-visible,
+.form-textarea:focus-visible,
+.form-control:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
 }
 
 .form-textarea { resize: vertical; }

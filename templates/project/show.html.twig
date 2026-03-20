@@ -5,36 +5,33 @@
         <section class="details-section">
             <h1 class="details-title">{{ project.name }}</h1>
             <div class="details-content">
-                <!-- <div class="project-image">
-                    <img src="{% if project.imagePath is not null %}{{ asset(project.imagePath) }}{% endif %}" alt="{{ project.name }}">
-                </div> -->
                 <div class="project-description">
                     <div class="rich-content">{{ content|raw }}</div>
                 </div>
-            </div>
-            <div class="details-additional-info">
-                {% if project.skills is not empty %}
-                    <h2>Compétences</h2>
-                    <div class="skills-container">
-                        <ul class="skills-list">
-                            {% for skill in project.skills %}
-                                <li><a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
+                <aside class="details-sidebar">
+                    <div class="details-additional-info">
+                        {% if project.skills is not empty %}
+                            <h2>Compétences</h2>
+                            <ul class="skills-list">
+                                {% for skill in project.skills %}
+                                    <li><a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
 
-                {% if project.createdAt %}
-                    <p class="project-date">Créé le : {{ project.createdAt|date('d/m/Y') }}</p>
-                {% endif %}
-                {% if project.repolink %}
-                <a href="{{ project.repolink }}" target="_blank">Lien vers le repository Git</a>
-                {% endif %}
-                {% if project.link %}
-                <a href="{{ project.link }}" target="_blank">Lien vers le projet</a>
-                {% endif %}
+                        {% if project.createdAt %}
+                            <p class="project-date">Créé le : {{ project.createdAt|date('d/m/Y') }}</p>
+                        {% endif %}
+                        {% if project.repolink %}
+                            <p><a href="{{ project.repolink }}" target="_blank" rel="noopener noreferrer" class="experience-link">Repository Git</a></p>
+                        {% endif %}
+                        {% if project.link %}
+                            <p><a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="experience-link">Voir le projet en ligne</a></p>
+                        {% endif %}
+                    </div>
+                </aside>
             </div>
-            <a href="{{ path('projects') }}" class="back-to-projects">Retour aux projets</a>
+            <a href="{{ path('projects') }}" class="back-to-projects">← Retour aux projets</a>
         </section>
     </main>
 {% endblock %}

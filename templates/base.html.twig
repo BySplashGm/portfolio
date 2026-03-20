@@ -16,21 +16,23 @@
     {% endblock %}
 </head>
 <body>
+{% set currentRoute = app.request.attributes.get('_route') %}
 <header id="top">
-    <nav>
+    <nav aria-label="Navigation principale">
         <div class="logo">
-            <span class="devlogo">&lt;/&gt;</span><span>Maxime's Portfolio</span>
+            <span class="devlogo" aria-hidden="true">&lt;/&gt;</span><span>Maxime's Portfolio</span>
         </div>
         <ul>
-            <li><a href="{{ path('index') }}">Accueil</a></li>
-            <li><a href="{{ path('about') }}">À propos</a></li>
-            <li><a href="{{ path('projects') }}">Projets</a></li>
-            <li><a href="{{ path('contact') }}">Contact</a></li>
+            <li><a href="{{ path('index') }}"{% if currentRoute == 'index' %} aria-current="page"{% endif %}>Accueil</a></li>
+            <li><a href="{{ path('about') }}"{% if currentRoute == 'about' %} aria-current="page"{% endif %}>À propos</a></li>
+            <li><a href="{{ path('projects') }}"{% if currentRoute in ['projects', 'project'] %} aria-current="page"{% endif %}>Projets</a></li>
+            <li><a href="{{ path('contact') }}"{% if currentRoute == 'contact' %} aria-current="page"{% endif %}>Contact</a></li>
         </ul>
     </nav>
-    {% if app.flashes('success') %}
-        <div class="flash-success">
-            {% for message in app.flashes('success') %}
+    {% set flashes = app.flashes('success') %}
+    {% if flashes %}
+        <div class="flash-success" role="status">
+            {% for message in flashes %}
                 <p>{{ message }}</p>
             {% endfor %}
         </div>
@@ -66,24 +68,24 @@
         <div class="footer-left">
             <div class="footer-sp">
                 <ul>
-                    <li><a href="https://github.com/BySplashGm" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
-                    <li><a href="https://www.linkedin.com/in/maximevalin/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="https://github.com/BySplashGm" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/maximevalin/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
                 </ul>
             </div>
             <div class="back-to-top">
-                <a href="#top"><i class="fas fa-arrow-up"></i> Retour en haut</a>
+                <a href="#top"><i class="fas fa-arrow-up" aria-hidden="true"></i> Retour en haut</a>
             </div>
         </div>
         <!-- Section centrale : Navigation -->
         <div class="footer-center">
-            <div class="footer-links">
+            <nav class="footer-links" aria-label="Navigation secondaire">
                 <ul>
                     <li><a href="{{ path('index') }}">Accueil</a></li>
                     <li><a href="{{ path('about') }}">À propos</a></li>
                     <li><a href="{{ path('projects') }}">Projets</a></li>
                     <li><a href="{{ path('contact') }}">Contact</a></li>
                 </ul>
-            </div>
+            </nav>
         </div>
         <!-- Section droite : Informations supplémentaires -->
         <div class="footer-right">
@@ -93,7 +95,7 @@
     <!-- Bas de page -->
     <div class="footer-bottom">
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('admin') }}" target="_blank">Panel Admin</a>
+            <a href="{{ path('admin') }}" target="_blank" rel="noopener noreferrer">Panel Admin</a>
             <a href="{{ path('app_logout') }}">Déconnexion</a>
         {% endif %}
         <p>&copy; {{ "now"|date("Y") }} {{ site_name | default('Maxime\'s Portfolio') }}. Tous droits réservés.</p>

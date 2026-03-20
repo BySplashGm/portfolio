@@ -225,11 +225,26 @@
     gap: 1.5rem;
 }
 
+@media (min-width: 768px) {
+    .skills-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .skill-type {
+        flex: 1;
+        min-width: 180px;
+    }
+}
+
 .skill-type-title {
     font-size: 1.1rem;
     font-weight: bold;
     color: var(--color-accent);
     margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid var(--color-accent);
 }
 
 @media (min-width: 768px) {
@@ -296,7 +311,8 @@
 }
 
 .project-link {
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 2px;
     color: var(--color-link);
     font-weight: bold;
     transition: color 0.3s;
@@ -327,14 +343,30 @@
     flex-direction: column;
     gap: 1.5rem;
     margin-bottom: 1.5rem;
+    align-items: flex-start;
+}
+
+.project-description {
+    min-width: 0;
+    width: 100%;
+}
+
+.details-sidebar {
+    width: 100%;
 }
 
 @media (min-width: 768px) {
-    .details-content { gap: 2rem; margin-bottom: 2rem; }
+    .details-content {
+        flex-direction: row;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .project-description { flex: 2; }
+    .details-sidebar { flex: 1; }
 }
 
 .details-additional-info {
-    margin-top: 1.5rem;
     background-color: var(--color-surface);
     padding: 1rem;
     border-radius: var(--radius-xl);
@@ -356,7 +388,7 @@
     margin-bottom: 0.75rem;
 }
 
-.details-additional-info ul {
+.details-additional-info ul:not(.skills-list) {
     list-style: disc;
     padding-left: 1.5rem;
     margin-top: 0.5rem;
@@ -451,7 +483,8 @@
     display: inline-block;
     color: var(--color-link);
     font-weight: bold;
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 2px;
     font-size: 0.9rem;
     transition: color 0.3s;
 }
@@ -574,7 +607,8 @@
 
 .error-section a {
     color: var(--color-link);
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 .error-section a:hover { color: var(--color-link-hover); }

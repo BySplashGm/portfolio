@@ -8,7 +8,7 @@
             <h1 class="section-title">À propos de moi</h1>
             <div class="about-container">
                 <div class="about-image">
-                    <img src="{{ asset('images/moi.png') }}" alt="image Maxime">
+                    <img src="{{ asset('images/moi.png') }}" alt="Photo de profil de Maxime">
                 </div>
                 <div class="about-details">
                     <p>
@@ -17,7 +17,7 @@
                     <p>
                         J'ai à cœur de créer des projets qui allient efficacité et expérience utilisateur. Actuellement, je suis en troisième année de Licence MIAGE (Méthodes Informatiques Appliquées à la Gestion des Entreprises).
                     </p>
-                    <a class="experience-link" href="{{ asset('Maxime VALIN - CV - maximeval.in .pdf') }}" target="_blank">CV Téléchargeable</a>
+                    <a class="experience-link" href="{{ asset('Maxime VALIN - CV - maximeval.in .pdf') }}" target="_blank" rel="noopener noreferrer">CV Téléchargeable</a>
                 </div>
             </div>
         </section>
@@ -26,18 +26,19 @@
             <h2 class="section-title">Formation</h2>
             <div class="formation-container">
                 <div class="formation-card">
-                    <a href="https://sciences-techniques.univ-nantes.fr/" target="_blank"><h3>Licence MIAGE [2025-2026]</h3></a>
+                    <a href="https://sciences-techniques.univ-nantes.fr/" target="_blank" rel="noopener noreferrer"><h3>Licence MIAGE [2025-2026]</h3></a>
                     <p>
                         Actuellement en Licence MIAGE (Méthodes Informatiques Appliquées à la Gestion des Entreprises). Passionné par le développement logiciel, je me forme aux technologies utilisées pour concevoir des solutions informatiques adaptées aux besoins des entreprises.
                     </p>
                 </div>
                 <div class="formation-card">
-                    <a href="https://coliniere.paysdelaloire.e-lyco.fr/" target="_blank"><h3>BTS SIO [2023-2025]</h3></a>
+                    <a href="https://coliniere.paysdelaloire.e-lyco.fr/" target="_blank" rel="noopener noreferrer"><h3>BTS SIO [2023-2025]</h3></a>
                     <p>
                         J'ai obtenu mon BTS SIO (Services Informatiques aux Organisations) & Cybersécurité, en spécialité SLAM (Solutions Logicielles et Applications Métiers).
+                    </p>
                 </div>
                 <div class="formation-card">
-                    <a href="https://caroline-aigle.paysdelaloire.e-lyco.fr/" target="_blank"><h3>Baccalauréat Général [2020-2023]</h3></a>
+                    <a href="https://caroline-aigle.paysdelaloire.e-lyco.fr/" target="_blank" rel="noopener noreferrer"><h3>Baccalauréat Général [2020-2023]</h3></a>
                     <p>
                         J'ai obtenu un bac général avec la spécialité AMC (Anglais Monde Contemporain) et NSI (Numérique et Sciences Informatiques), accompagné de l'option Mathématiques Complémentaires et Euro.
                     </p>
@@ -51,9 +52,7 @@
                 {% for experience in experiences %}
                     <div class="experience-card">
                         <h3>{{ experience.label }}</h3>
-                        <p>
-                            {{ experience.shortDescription }}
-                        </p>
+                        <p>{{ experience.shortDescription }}</p>
                         <a href="{{ path('experience_show', {'id': experience.id}) }}" class="experience-link">En savoir plus</a>
                     </div>
                 {% else %}

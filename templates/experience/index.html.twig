@@ -12,21 +12,23 @@
                     <div class="rich-content">{{ content|raw }}</div>
                 </div>
 
-                <div class="details-additional-info">
-                    <p class="experience-company">Entreprise : {{ experience.company }}</p>
+                <aside class="details-sidebar">
+                    <div class="details-additional-info">
+                        <p>Entreprise : {{ experience.company }}</p>
 
-                    {% if experience.skills is not empty %}
-                        <h2>Compétences</h2>
-                        <ul class="skills-list">
-                            {% for skill in experience.skills %}
-                                <li><a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </div>
+                        {% if experience.skills is not empty %}
+                            <h2>Compétences</h2>
+                            <ul class="skills-list">
+                                {% for skill in experience.skills %}
+                                    <li><a href="{{ path('skill_show', {'id': skill.id}) }}">{{ skill.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </aside>
             </div>
 
-            <a href="{{ path('about') }}" class="back-to-projects">Retour aux expériences</a>
+            <a href="{{ path('about') }}" class="back-link">← Retour aux expériences</a>
         </section>
     </main>
 {% endblock %}

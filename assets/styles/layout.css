@@ -44,9 +44,14 @@ nav a {
     transition: color 0.2s, background-color 0.2s;
 }
 
-nav a:hover {
+nav a:hover,
+nav a[aria-current="page"] {
     color: var(--color-accent);
     background-color: rgba(255, 255, 255, 0.05);
+}
+
+nav a[aria-current="page"] {
+    font-weight: 600;
 }
 
 @media (min-width: 768px) {
