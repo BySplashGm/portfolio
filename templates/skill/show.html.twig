@@ -2,16 +2,19 @@
 {% block title %}{{ skill.name }}{% endblock %}
 {% block body %}
     <main>
-        <section class="skill-projects">
-            <h1>Projets associés à {{ skill.name }}</h1>
+        <div class="skill-header">
+            <h1>{{ skill.name }}</h1>
+        </div>
 
+        <section class="skill-related-section">
+            <h2>Projets associés à {{ skill.name }}</h2>
             {% if skill.projects is not empty %}
-                <div class="projects-list">
+                <div class="related-list">
                     {% for project in skill.projects %}
-                        <div class="project-item">
-                            <h2>{{ project.name }}</h2>
+                        <div class="related-item">
+                            <h3>{{ project.name }}</h3>
                             <p>{{ project.shortDescription }}</p>
-                            <a href="{{ path('project', { 'id': project.id }) }}" class="btn">Voir le projet</a>
+                            <a href="{{ path('project', {'id': project.id}) }}" class="btn">Voir le projet</a>
                         </div>
                     {% endfor %}
                 </div>
@@ -19,16 +22,16 @@
                 <p>Aucun projet associé à cette compétence pour le moment.</p>
             {% endif %}
         </section>
-        <section class="skill-experiences">
-            <h1>Expériences associées à {{ skill.name }}</h1>
 
+        <section class="skill-related-section">
+            <h2>Expériences associées à {{ skill.name }}</h2>
             {% if skill.experiences is not empty %}
-                <div class="projects-list">
+                <div class="related-list">
                     {% for experience in skill.experiences %}
-                        <div class="project-item">
-                            <h2>{{ experience.label }}</h2>
+                        <div class="related-item">
+                            <h3>{{ experience.label }}</h3>
                             <p>{{ experience.shortDescription }}</p>
-                            <a href="{{ path('experience_show', { 'id': experience.id }) }}" class="btn">Voir l'expérience</a>
+                            <a href="{{ path('experience_show', {'id': experience.id}) }}" class="btn">Voir l'expérience</a>
                         </div>
                     {% endfor %}
                 </div>
