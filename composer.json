@@ -54,6 +54,9 @@
             "symfony/runtime": true
         },
         "bump-after-update": true,
+        "platform": {
+            "php": "8.2"
+        },
         "sort-packages": true
     },
     "autoload": {
