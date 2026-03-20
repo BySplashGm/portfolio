@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Experience;
 use App\Entity\Message;
 use App\Form\ContactFormType;
+use App\Repository\ExperienceRepository;
 use App\Repository\SkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,9 +23,9 @@ class MainController extends AbstractController
     }
 
     #[Route('/about', name: 'about')]
-    public function about(EntityManagerInterface $entityManager, SkillRepository $skillRepository): Response
+    public function about(ExperienceRepository $experienceRepository, SkillRepository $skillRepository): Response
     {
-        $experiences = $entityManager->getRepository(Experience::class)->findAll();
+        $experiences = $experienceRepository->findAll();
 
         $skillsByType = [];
         foreach ($skillRepository->findAllWithType() as $skill) {

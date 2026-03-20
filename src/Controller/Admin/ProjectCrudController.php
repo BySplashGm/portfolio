@@ -24,7 +24,6 @@ class ProjectCrudController extends AbstractCrudController
         yield TextField::new('name');
         yield TextField::new('status');
         yield TextField::new('shortDescription');
-        // TODO md support
         yield TextEditorField::new('description')
         ->hideOnIndex();
         yield AssociationField::new('skills');
