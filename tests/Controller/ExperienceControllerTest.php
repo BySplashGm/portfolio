@@ -36,7 +36,7 @@ class ExperienceControllerTest extends WebTestCase
         $this->em->persist($experience);
         $this->em->flush();
 
-        $this->client->request('GET', '/experience/'.$experience->getId());
+        $this->client->request('GET', '/experience/' . $experience->getId());
 
         $this->assertResponseIsSuccessful();
     }

@@ -43,7 +43,7 @@ class ProjectControllerTest extends WebTestCase
         $this->em->persist($project);
         $this->em->flush();
 
-        $this->client->request('GET', '/projects/'.$project->getId());
+        $this->client->request('GET', '/projects/' . $project->getId());
 
         $this->assertResponseIsSuccessful();
     }

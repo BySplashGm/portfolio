@@ -24,21 +24,21 @@ class SitemapController extends AbstractController
         $base = $request->getSchemeAndHttpHost();
 
         $urls = [
-            ['loc' => $base.'/', 'changefreq' => 'weekly', 'priority' => '1.0'],
-            ['loc' => $base.'/about', 'changefreq' => 'monthly', 'priority' => '0.8'],
-            ['loc' => $base.'/projects', 'changefreq' => 'weekly', 'priority' => '0.9'],
+            ['loc' => $base . '/', 'changefreq' => 'weekly', 'priority' => '1.0'],
+            ['loc' => $base . '/about', 'changefreq' => 'monthly', 'priority' => '0.8'],
+            ['loc' => $base . '/projects', 'changefreq' => 'weekly', 'priority' => '0.9'],
         ];
 
         foreach ($projectRepository->findAll() as $project) {
-            $urls[] = ['loc' => $base.'/projects/'.$project->getId(), 'changefreq' => 'monthly', 'priority' => '0.7'];
+            $urls[] = ['loc' => $base . '/projects/' . $project->getId(), 'changefreq' => 'monthly', 'priority' => '0.7'];
         }
 
         foreach ($experienceRepository->findAll() as $experience) {
-            $urls[] = ['loc' => $base.'/experience/'.$experience->getId(), 'changefreq' => 'monthly', 'priority' => '0.6'];
+            $urls[] = ['loc' => $base . '/experience/' . $experience->getId(), 'changefreq' => 'monthly', 'priority' => '0.6'];
         }
 
         foreach ($skillRepository->findAll() as $skill) {
-            $urls[] = ['loc' => $base.'/skill/'.$skill->getId(), 'changefreq' => 'monthly', 'priority' => '0.5'];
+            $urls[] = ['loc' => $base . '/skill/' . $skill->getId(), 'changefreq' => 'monthly', 'priority' => '0.5'];
         }
 
         return new Response(
