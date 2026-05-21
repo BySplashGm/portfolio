@@ -38,7 +38,7 @@ class SkillControllerTest extends WebTestCase
         $this->em->persist($skill);
         $this->em->flush();
 
-        $this->client->request('GET', '/skill/'.$skill->getId());
+        $this->client->request('GET', '/skill/' . $skill->getId());
 
         $this->assertResponseIsSuccessful();
     }
