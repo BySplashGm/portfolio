@@ -39,6 +39,9 @@ jobs:
             # install PHP deps
             composer install --no-dev --optimize-autoloader --no-scripts
 
+            # install bundle public assets (e.g. EasyAdmin CSS/JS), skipped by --no-scripts above
+            php bin/console assets:install public --env=prod
+
             # clear/warm cache
             php bin/console cache:clear --env=prod --no-warmup
             php bin/console cache:warmup --env=prod
