@@ -11,7 +11,7 @@
         "doctrine/doctrine-bundle": "^2.18.2",
         "doctrine/doctrine-migrations-bundle": "^3.7.0",
         "doctrine/orm": "^3.6.6",
-        "easycorp/easyadmin-bundle": "^4.29.8",
+        "easycorp/easyadmin-bundle": "^4.29.14",
         "league/commonmark": "^2.8.2",
         "phpdocumentor/reflection-docblock": "^5.6.7",
         "phpstan/phpdoc-parser": "^2.3.2",
@@ -45,7 +45,7 @@
         "symfony/web-link": "7.4.*",
         "symfony/yaml": "7.4.*",
         "twig/extra-bundle": "^2.12|^3.24.0",
-        "twig/twig": "^2.12|^3.26"
+        "twig/twig": "^2.12|^3.28"
     },
     "config": {
         "allow-plugins": {
